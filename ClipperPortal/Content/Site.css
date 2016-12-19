@@ -151,3 +151,6 @@ input.full-width {
 .error-message {
     color: red;
 }
+.wrap-agency {
+    max-width: 18rem;
+}
