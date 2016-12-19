@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ClipperPortal.Models.ReplacementVehicle>
+
+@{
+    ViewBag.Title = "Home Page";
+
+    var message = string.Empty;
+    var className = string.Empty;
+
+    if (TempData.ContainsKey("Message"))
+    {
+        message = TempData["Message"].ToString();
+    }
+    else if (TempData.ContainsKey("ErrorMessage"))
+    {
+        className = "error-message";
+        message = TempData["ErrorMessage"].ToString();
+    }
+}
+<div class="replacement-vehicles list-page">
+    <h2>Replacement Vehicles</h2>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    @{
+        <span class="status-message @className">@message</span>
+    }
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CalendarYear)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agency)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Manufacturer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VehicleCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VehicleModel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RecordStatus)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var manufacturer = item.Manufacturer == "other" ? item.OtherManufacturer : item.Manufacturer;
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CalendarYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Agency)
+                    </td>
+                    <td>
+                        @manufacturer
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleModel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RecordStatus)
+                    </td>
+                    <td class="buttons">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-xs" })
+                        <button class="btn btn-danger btn-xs btn-delete" data-id="@item.ID">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        PageManager.startStatusMessageTimer();
+
+        $(function () {
+            PageManager.bind();
+        });
+    </script>
+}

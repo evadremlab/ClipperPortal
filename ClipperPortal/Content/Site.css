@@ -1,0 +1,153 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    margin-bottom: 3rem;
+    height: 101%; /* so we always have a vscrollbar */
+    overflow-y: scroll;
+}
+footer {
+    height: 3rem;
+    line-height: 3rem;
+    vertical-align: middle;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: #ddd;
+    width: 100%;
+}
+footer p {
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    text-align: right;
+}
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Carousel */
+.carousel-caption p {   
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* buttons and links extension to use brackets: [ click me ] */
+.btn-bracketed::before {
+    display:inline-block;
+    content: "[";
+    padding-right: 0.5em;
+}
+.btn-bracketed::after {
+    display:inline-block;
+    content: "]";
+    padding-left: 0.5em;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"]
+{
+    width: 100%;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+  /* Hide captions */
+  .carousel-caption {
+    display: none
+  }
+}
+
+.well {
+    margin-top: 20px;
+    background-color: #7ac0da;
+    background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+    background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #7ac0da), color-stop(1, #a4d4e6));
+    background-image: -webkit-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+    background-image: linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+    color: #3e5667;
+}
+.well .product {
+    color: #fff;
+    font-size: 36px;
+}
+.well .caption {
+    color: #fff;
+    font-size: 28px;
+}
+
+/* ordered list */
+ol.round {
+    padding-left: 0;
+    list-style-type: none;
+}
+ol.round h1 {
+    font-size: 28px;
+}
+ol.round li {
+    margin: 25px 0;
+    padding-left: 45px;
+}
+ol.round li.one {
+    background: url("../Images/orderedList1.png") no-repeat;
+}
+ol.round li.two {
+    background: url("../Images/orderedList2.png") no-repeat;
+}
+ol.round li.three {
+    background: url("../Images/orderedList3.png") no-repeat;
+}
+
+/* tabs */
+#report-tabs li a {
+    font-weight: bold;
+}
+#report-tabs li.active a {
+    background-color: #ddd;
+}
+
+table .buttons {
+    width: 12rem;
+    text-align: right;
+}
+
+/* Bootstrap overrides */
+
+.table-striped > tbody > tr:nth-child(odd) > td, 
+.table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #eee;
+}
+
+.table-striped > tbody > tr:hover,
+.table-striped > tbody > tr:hover td {
+    background-color: #ede;
+}
+
+/* Bootstrap mods */
+
+.text-left-important {
+    text-align: left !important;
+}
+input.full-width {
+    max-width: 100%;
+}
+.field-validation-error::before {
+    content: "* "
+}
+.status-message {
+    font-size: 80%;
+    font-weight: bold;
+    color: blue;
+}
+.error-message {
+    color: red;
+}
