@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using Foolproof;
+
 namespace ClipperPortal.Models
 {
     [Table("expansiondetails")]
@@ -11,6 +13,7 @@ namespace ClipperPortal.Models
         public bool HaveExistingVehicles { get; set; }
 
         [Display(Name = "Will you be seeking to install Clipper® equipment in the same/similar location on the new vehicles?")]
+        [RequiredIfTrue("HaveExistingVehicles", ErrorMessage = "field is required")]
         public bool HaveExistingVehicleDetails { get; set; }
 
         [Display(Name = "Specify the model and equipment placement details")]

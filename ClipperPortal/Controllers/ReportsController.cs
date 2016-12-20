@@ -14,7 +14,7 @@ namespace ClipperPortal.Controllers
         // GET: Report/Audit
         public ActionResult Audit()
         {
-            var model = AuditRecordProvider.Get();
+            var model = AuditRecordProvider.GetAll();
 
             return View(model);
         }

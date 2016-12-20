@@ -9,7 +9,7 @@ namespace ClipperPortal.Services
 {
     public static class ReplacementVehicleProvider
     {
-        public static IEnumerable<ReplacementVehicle> Get()
+        public static IEnumerable<ReplacementVehicle> GetAll()
         {
             using (var context = new ClipperContext())
             {

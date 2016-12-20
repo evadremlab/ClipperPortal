@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+using Foolproof;
+
 namespace ClipperPortal.Models
 {
     public class AbstractRecord
@@ -20,7 +22,7 @@ namespace ClipperPortal.Models
         public string Manufacturer { get; set; }
 
         [Display(Name = "Other Manufacturer")]
-        //[RequiredIf("Manufacturer", "other", ErrorMessage = "Other Manufacturer is required.")]
+        [RequiredIf("Manufacturer", "other", ErrorMessage = "field is required.")]
         public string OtherManufacturer { get; set; }
 
         public string UserName { get; set; }

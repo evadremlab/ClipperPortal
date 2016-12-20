@@ -12,7 +12,7 @@ namespace ClipperPortal.Controllers
         // GET: ReplacementVehicles
         public ActionResult Index()
         {
-            var model = ReplacementVehicleProvider.Get();
+            var model = ReplacementVehicleProvider.GetAll();
 
             return View(model);
         }
@@ -60,9 +60,11 @@ namespace ClipperPortal.Controllers
 
             try
             {
-                ReplacementVehicleProvider.Update(id, data);
-                TempData["Message"] = statusMsg;
-                return RedirectToAction("Index");
+                throw new Exception("testing");
+
+                //ReplacementVehicleProvider.Update(id, data);
+                //TempData["Message"] = statusMsg;
+                //return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

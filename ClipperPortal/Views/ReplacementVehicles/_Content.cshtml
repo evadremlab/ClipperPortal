@@ -1,6 +1,8 @@
 ﻿@using ClipperPortal.Services
 @model ClipperPortal.Models.ReplacementVehicle
 
+@*@{ Html.RenderPartial("~/Views/Shared/_StatusMessage"); }*@
+
 @{
     var lookupData = ViewHelper.GetLookupData();
     var otherManufacturerClass = "hidden";

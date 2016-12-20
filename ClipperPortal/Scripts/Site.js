@@ -92,11 +92,19 @@ var PageManager = (function () {
     }
 
     function hideshowOtherManufacturer(manufacturer) {
-        setVisibility('.other-manufacturer', manufacturer !== 'other');
+        var hide = manufacturer !== 'other';
+        setVisibility('.other-manufacturer', hide);
+        if (hide) {
+            $('#OtherManufacturer').val('');
+        }
     }
 
     function hideshowExistingVehicleDetails(isChecked) {
-        setVisibility('.existing-vehicle-details', !isChecked);
+        var hide = !isChecked;
+        setVisibility('.existing-vehicle-details', hide);
+        if (hide) {
+            $('#HaveExistingVehicleDetails').prop('checked', false);
+        }
     }
 
     function bindManufacturer() {

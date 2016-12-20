@@ -1,0 +1,16 @@
+﻿@{
+    var message = string.Empty;
+    var className = string.Empty;
+
+    if (TempData.ContainsKey("Message"))
+    {
+        message = TempData["Message"].ToString();
+    }
+    else if (TempData.ContainsKey("ErrorMessage"))
+    {
+        className = "error-message";
+        message = TempData["ErrorMessage"].ToString();
+    }
+
+    <span class="status-message @className">@message</span>
+}

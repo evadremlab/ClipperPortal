@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
-
-using MySql.Data;
-using MySql.Data.MySqlClient;
 
 using ClipperPortal.Models;
 using ClipperPortal.Services;
@@ -18,7 +11,7 @@ namespace ClipperPortal.Controllers
     {
         public IEnumerable<ExpansionDetail> Get()
         {
-            return ExpansionDetailProvider.Get();
+            return ExpansionDetailProvider.GetAll();
         }
 
         public ExpansionDetail Get(int id)

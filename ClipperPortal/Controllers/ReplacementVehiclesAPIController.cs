@@ -18,7 +18,7 @@ namespace ClipperPortal.Controllers
     {
         public IEnumerable<ReplacementVehicle> Get()
         {
-            return ReplacementVehicleProvider.Get();
+            return ReplacementVehicleProvider.GetAll();
         }
 
         public ReplacementVehicle Get(int id)

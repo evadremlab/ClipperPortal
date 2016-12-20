@@ -9,7 +9,7 @@ namespace ClipperPortal.Services
 {
     public static class ExpansionDetailProvider
     {
-        public static IEnumerable<ExpansionDetail> Get()
+        public static IEnumerable<ExpansionDetail> GetAll()
         {
             using (var context = new ClipperContext())
             {

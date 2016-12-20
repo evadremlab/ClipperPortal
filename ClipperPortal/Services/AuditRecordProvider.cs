@@ -8,7 +8,7 @@ namespace ClipperPortal.Services
 {
     public static class AuditRecordProvider
     {
-        public static IEnumerable<AuditRecord> Get()
+        public static IEnumerable<AuditRecord> GetAll()
         {
             using (var context = new ClipperContext())
             {

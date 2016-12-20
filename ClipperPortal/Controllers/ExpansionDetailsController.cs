@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using System.Web.Mvc;
 
 using ClipperPortal.Models;
@@ -12,7 +11,7 @@ namespace ClipperPortal.Controllers
         // GET: ExpansionDetails
         public ActionResult Index()
         {
-            var model = ExpansionDetailProvider.Get();
+            var model = ExpansionDetailProvider.GetAll();
 
             return View(model);
         }
@@ -38,6 +37,7 @@ namespace ClipperPortal.Controllers
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = statusMsg + ex.ToString();
+                return View();
             }
 
             return RedirectToAction("Index");

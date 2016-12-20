@@ -1,0 +1,1 @@
+﻿This folder and files were created when installing https://foolproof.codeplex.com/
