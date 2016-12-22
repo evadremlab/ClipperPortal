@@ -9,6 +9,7 @@ namespace ClipperPortal.Controllers
 {
     public class ExpansionDetailsAPIController : ApiController
     {
+        [HttpPost]
         public IEnumerable<ExpansionDetail> Get()
         {
             return ExpansionDetailProvider.GetAll();

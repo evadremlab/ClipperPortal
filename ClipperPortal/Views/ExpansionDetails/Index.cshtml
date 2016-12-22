@@ -1,8 +1,9 @@
-﻿@using ClipperPortal.Services
+﻿@using System.Web;
+@using GridMvc.Html
 @model IEnumerable<ClipperPortal.Models.ExpansionDetail>
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Clipper - Expansion Details";
 
     var message = string.Empty;
     var className = string.Empty;
@@ -19,77 +20,24 @@
 }
 
 <div class="expansion-details list-page">
-
     <h2>Expansion Details</h2>
-
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-
     @{
         <span class="status-message @className">@message</span>
     }
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CalendarYear)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Agency)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Manufacturer)
-                </th>
-                <th>
-                    Vehicle Count
-                </th>
-                <th>
-                    Manufacturing Date
-                </th>
-                <th>
-                    Delivery Date
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RecordStatus)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                var manufacturer = item.Manufacturer == "other" ? item.OtherManufacturer : item.Manufacturer;
-
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CalendarYear)
-                    </td>
-                    <td class="wrap-agency">
-                        @Html.DisplayFor(modelItem => item.Agency)
-                    </td>
-                    <td>
-                        @manufacturer
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.VehicleCount)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ManufacturingDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DeliveryDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RecordStatus)
-                    </td>
-                    <td class="buttons">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-xs" })
-                        <button class="btn btn-danger btn-xs btn-delete" data-id="@item.ID">Delete</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @Html.Grid(Model).Named("expansionDetailsGrid").Columns(columns =>
+    {
+        columns.Add(x => x.ID).Css("hidden");
+        columns.Add(x => x.CalendarYear).Titled("Calendar Year").Sortable(true);
+        columns.Add(x => x.Agency).Titled("Operator").Sortable(true);
+        columns.Add(x => x.Manufacturer).Titled("Manufacturer").Sortable(true);
+        columns.Add(x => x.VehicleCount).Titled("Vehicle Count").Sortable(true);
+        columns.Add(x => x.ManufacturingDate).Titled("Manufacturing Date").Sortable(true);
+        columns.Add(x => x.DeliveryDate).Titled("Delivery Date").Sortable(true);
+        columns.Add(x => x.RecordStatus).Titled("Record Status").Sortable(true);
+        columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => Html.ActionLink("Edit", "Edit", new { id = x.ID }, new { @class = "btn btn-primary btn-xs" }));
+        columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => @<button class="btn btn-danger btn-xs btn-delete" data-id="@x.ID">Delete</button>);
+    }).WithPaging(15)
 </div>
 
 @section Scripts

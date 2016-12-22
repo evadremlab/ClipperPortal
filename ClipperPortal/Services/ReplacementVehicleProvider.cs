@@ -53,6 +53,7 @@ namespace ClipperPortal.Services
                 {
                     context.ReplacementVehicles.Attach(record);
                     context.ReplacementVehicles.Remove(record);
+                    context.SaveChanges();
                 }
             }
         }

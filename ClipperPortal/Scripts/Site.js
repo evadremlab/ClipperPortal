@@ -1,23 +1,4 @@
 ﻿
-//$.validator.addMethod('requiredif', function (value, element, parameters) {
-//    var desiredvalue = parameters.desiredvalue;
-//    desiredvalue = (desiredvalue == null ? '' : desiredvalue).toString();
-//    var controlType = $("input[id$='" + parameters.dependentproperty + "']").attr("type");
-//    var actualvalue = {}
-//    if (controlType == "checkbox" || controlType == "radio") {
-//        var control = $("input[id$='" + parameters.dependentproperty + "']:checked");
-//        actualvalue = control.val();
-//    } else {
-//        actualvalue = $("#" + parameters.dependentproperty).val();
-//    }
-//    if ($.trim(desiredvalue).toLowerCase() === $.trim(actualvalue).toLocaleLowerCase()) {
-//        var isValid = $.validator.methods.required.call(this, value, element, parameters);
-//        return isValid;
-//    }
-//    return true;
-//});
-"use strict";
-
 // so we don't break IE when Developer Tools not open
 
 if (typeof console === 'undefined') {
@@ -100,10 +81,12 @@ var PageManager = (function () {
     }
 
     function hideshowExistingVehicleDetails(isChecked) {
-        var hide = !isChecked;
-        setVisibility('.existing-vehicle-details', hide);
-        if (hide) {
-            $('#HaveExistingVehicleDetails').prop('checked', false);
+        setVisibility('.existing-vehicle-details', !isChecked);
+        setVisibility('.replacement-vehicle-details', isChecked);
+        if (isChecked) {
+            $('#ReplacementVehicleDetails').val('');
+        } else {
+            $('#ExistingVehicleDetails').val('');
         }
     }
 
@@ -136,12 +119,15 @@ var PageManager = (function () {
 
     function ajaxDelete(recordType) {
         var $el = $(this);
+        var $row = $el.closest('tr');
+        var id = $row.find('td.hidden').text(); // assumes that ID is a hidden field
         $.ajax({
             type: 'DELETE',
-            url: '/api/{0}sAPI/{1}'.format(recordType, $el.data().id),
+            url: '/api/{0}sAPI/{1}'.format(recordType, id),
             success: function (result) {
-                showStatusMessage(result.Status);
-                $el.closest('tr').hide(); // so we don't have to refresh the page
+                //showStatusMessage(result.Status);
+                //$row.hide(); // so we don't have to refresh the page (but it messes up table striping)
+                window.location.reload();
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 showErrorMessage('Error deleting {0}: {1}'.format(recordType, thrownError));

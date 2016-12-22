@@ -13,8 +13,8 @@ namespace ClipperPortal.Models
         public bool HaveExistingVehicles { get; set; }
 
         [Display(Name = "Will you be seeking to install Clipper® equipment in the same/similar location on the new vehicles?")]
-        [RequiredIfTrue("HaveExistingVehicles", ErrorMessage = "field is required")]
-        public bool HaveExistingVehicleDetails { get; set; }
+        //EquipmentLocation
+        public string ExistingVehicleDetails { get; set; }
 
         [Display(Name = "Specify the model and equipment placement details")]
         public string ReplacementVehicleDetails { get; set; }
@@ -34,6 +34,7 @@ namespace ClipperPortal.Models
         public DateTime ManufacturingDate { get; set; }
 
         [Required(ErrorMessage = "field is required")]
+        [GreaterThan("ManufacturingDate", ErrorMessage = "must be after the Manufacturing Date")]
         [Display(Name = "When are vehicles anticipated to be delivered to your facility?")]
         public DateTime DeliveryDate { get; set; }
 

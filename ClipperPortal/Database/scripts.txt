@@ -58,8 +58,8 @@ CREATE TABLE `expansiondetails` (
   `Agency` text NOT NULL,
   `CalendarYear` text,
   `DeliveryDate` datetime(6) NOT NULL,
-  `HaveExistingVehicleDetails` bit(1) NOT NULL,
   `HaveExistingVehicles` bit(1) NOT NULL,
+  `ExistingVehicleDetails` TEXT,	-- changed
   `IncludedCosts` text,
   `Manufacturer` text,
   `ManufacturingDate` datetime(6) NOT NULL,

@@ -154,3 +154,10 @@ input.full-width {
 .wrap-agency {
     max-width: 18rem;
 }
+
+/* gridMvc tweaks */
+
+table.grid-table tr.grid-row-selected td {
+    background: inherit !important;
+    color: inherit;
+}

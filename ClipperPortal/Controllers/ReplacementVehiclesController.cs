@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 using ClipperPortal.Models;
 using ClipperPortal.Services;
+using System.Linq;
 
 namespace ClipperPortal.Controllers
 {
@@ -13,8 +14,15 @@ namespace ClipperPortal.Controllers
         public ActionResult Index()
         {
             var model = ReplacementVehicleProvider.GetAll();
+            //                var manufacturer = item.Manufacturer == "other" ? item.OtherManufacturer : item.Manufacturer;
+
 
             return View(model);
+        }
+
+        public ActionResult Grid()
+        {
+            return View();
         }
 
         // GET: ReplacementVehicles/Create

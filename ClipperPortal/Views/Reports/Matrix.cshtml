@@ -1,7 +1,8 @@
-﻿@model IEnumerable<ClipperPortal.Models.ReportMatrix>
+﻿@using GridMvc.Html
+@model IEnumerable<ClipperPortal.Models.ReportMatrix>
 
 @{
-    ViewBag.Title = "Report Matrix";
+    ViewBag.Title = "Reports - Matrix";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,46 +13,11 @@
     @Html.ActionLink("Audit Records", "Audit", null, new { @class = "btn btn-default" })
 </p>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Agency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CalendarYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecordStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExpansionVehicleCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReplacementVehicleCount)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Agency)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CalendarYear)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RecordStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExpansionVehicleCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReplacementVehicleCount)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(x => x.Agency).Titled("Operator");
+    columns.Add(x => x.CalendarYear).Titled("Calendar Year");
+    columns.Add(x => x.RecordStatus).Titled("Record Status");
+    columns.Add(x => x.ExpansionVehicleCount).Titled("Expansion Vehicles");
+    columns.Add(x => x.ReplacementVehicleCount).Titled("Replacement Vehicles");
+}).WithPaging(15)

@@ -1,7 +1,8 @@
-﻿@model IEnumerable<ClipperPortal.Models.AuditRecord>
+﻿@using GridMvc.Html
+@model IEnumerable<ClipperPortal.Models.AuditRecord>
 
 @{
-    ViewBag.Title = "Audit Records";
+    ViewBag.Title = "Reports - Audit Records";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,52 +13,12 @@
     @Html.ActionLink("Audit Records", "Audit", null, new { @class = "btn btn-primary" })
 </p>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EntityName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrimaryKeyValue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OldValue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NewValue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateChanged)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EntityName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PrimaryKeyValue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertyName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OldValue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NewValue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateChanged)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(x => x.EntityName).Titled("Entity").Sortable(true);
+    columns.Add(x => x.PrimaryKeyValue).Titled("ID");
+    columns.Add(x => x.PropertyName).Titled("Property").Sortable(true);
+    columns.Add(x => x.OldValue).Titled("Old Value").Sortable(true);
+    columns.Add(x => x.NewValue).Titled("New Value").Sortable(true);
+    columns.Add(x => x.DateChanged).Titled("Date Changed").Sortable(true);
+}).WithPaging(15)
