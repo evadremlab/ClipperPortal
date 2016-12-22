@@ -1,0 +1,404 @@
+﻿@using ClipperPortal.Services
+@model ClipperPortal.Models.DeviceSurvey
+
+<style>
+    .with-custom-label label {
+        font-weight: bold;
+        padding-right: 1rem;
+    }
+
+    .text-left-important {
+        text-align: left !important;
+    }
+    .full-width-important {
+        width: 100%;
+        max-width: 100% !important;
+    }
+</style>
+@{
+    var HIDDEN = ""; // "hidden";
+    var lookupData = ViewHelper.GetLookupData();
+}
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CalendarYear, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.CalendarYear, lookupData.CalendarYears, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CalendarYear, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Agency, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Agency, lookupData.Agencies, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Agency, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RecordStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.RecordStatus, lookupData.RecordStatus, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RecordStatus, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <h3>Manufacturers</h3>
+
+    <div class="form-group with-custom-label">
+        <div class="checkbox col-md-4">
+            <label>
+                @Html.EditorFor(model => model.HasGillig) Gillig
+            </label>
+            <label>
+                @Html.EditorFor(model => model.HasNewFlyer) New Flyer
+            </label>
+            <label>
+                @Html.EditorFor(model => model.HasElDorado) El Dorado
+            </label>
+            <label>
+                @Html.EditorFor(model => model.HasOther) Other
+            </label>
+        </div>
+        <div class="col-md-8 @(Model.HasOther ? "" : HIDDEN)">
+            @Html.EditorFor(model => model.OtherName, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.OtherName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <h3>New Vehicles?</h3>
+
+    <div class="form-group with-custom-label">
+        <div class="checkbox col-md-12">
+            <label>
+                @Html.EditorFor(model => model.IsExpectingNewVehicles) Are you anticipating delivery of new vehicles in this calendar year?
+            </label>
+        </div>
+    </div>
+
+    <div class="expecting-new-vehicles @(Model.IsExpectingNewVehicles ? "" : HIDDEN)">
+        <h4>How many vehicles?</h4>
+
+        <div class="form-group expecting-new-vehicles gillig @(Model.HasGillig ? "" : HIDDEN)">
+            @Html.LabelFor(model => model.GilligNewVehicles, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GilligNewVehicles, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GilligNewVehicles, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group expecting-new-vehicles newflyer @(Model.HasNewFlyer ? "" : HIDDEN)">
+            @Html.LabelFor(model => model.FlyerNewVehicles, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FlyerNewVehicles, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FlyerNewVehicles, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group expecting-new-vehicles eldorado @(Model.HasElDorado ? "" : HIDDEN)">
+            @Html.LabelFor(model => model.ElDoradoNewVehicles, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ElDoradoNewVehicles, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ElDoradoNewVehicles, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group expecting-new-vehicles other @(Model.HasOther ? "" : HIDDEN)">
+            @Html.LabelFor(model => model.OtherNewVehicles, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OtherNewVehicles, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OtherNewVehicles, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <h4>What model of vehicle (example: low-floor, BRT front)?</h4>
+
+    <div class="form-group expecting-new-vehicles gillig @(Model.HasGillig ? "" : HIDDEN)">
+        @Html.LabelFor(model => model.GilligNewModel, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.GilligNewModel, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.GilligNewModel, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group expecting-new-vehicles newflyer @(Model.HasNewFlyer ? "" : HIDDEN)">
+        @Html.LabelFor(model => model.NewFlyerNewModel, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NewFlyerNewModel, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewFlyerNewModel, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group expecting-new-vehicles eldorado @(Model.HasElDorado ? "" : HIDDEN)">
+        @Html.LabelFor(model => model.ElDoradoNewModel, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ElDoradoNewModel, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ElDoradoNewModel, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group expecting-new-vehicles other @(Model.HasOther ? "" : HIDDEN)">
+        @Html.LabelFor(model => model.OtherNewModel, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.OtherNewModel, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.OtherNewModel, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <h3>Existing vehicles</h3>
+
+    <div class="form-group with-custom-label">
+        <div class="checkbox col-md-12">
+            <label>
+                @Html.EditorFor(model => model.OwnExistingVehicles) Do you own existing vehicles of the same/similar model?
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group existing-vehicles-yes @(Model.OwnExistingVehicles ? "" : HIDDEN)">
+        @Html.LabelFor(model => model.ExistingVehicleDetails, htmlAttributes: new { @class = "control-label col-md-12 text-left-important" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.ExistingVehicleDetails, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.ExistingVehicleDetails, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group existing-vehicles-no @(Model.OwnExistingVehicles ? HIDDEN : "")">
+        @Html.LabelFor(model => model.ReplacementVehicleDetails, htmlAttributes: new { @class = "control-label col-md-12 text-left-important" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.ReplacementVehicleDetails, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.ReplacementVehicleDetails, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <h3>How may of these are vehicle replacements, or fleet additions?</h3>
+    <p>
+        <em>As a reminder to Clipper® operators, any additional vehicle equipment required for fleet expansion must be procured by MTC</em>
+    </p>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GilligReplacementVehicles, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.GilligReplacementVehicles, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.GilligReplacementVehicles, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GilligExpansionVehicles, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.GilligExpansionVehicles, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.GilligExpansionVehicles, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewFlyerReplacementVehicles, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.NewFlyerReplacementVehicles, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.NewFlyerReplacementVehicles, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewFlyerExpansionVehicles, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.NewFlyerExpansionVehicles, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.NewFlyerExpansionVehicles, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ElDoradoReplacementVehicles, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.ElDoradoReplacementVehicles, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.ElDoradoReplacementVehicles, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ElDoradoExpansionVehicles, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.ElDoradoExpansionVehicles, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.ElDoradoExpansionVehicles, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <h4>When (dates) do vehicles start the manufacturing line?</h4>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GilligReplacementManufacturingDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.GilligReplacementManufacturingDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.GilligReplacementManufacturingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GilligExpansionManufacturingDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.GilligExpansionManufacturingDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.GilligExpansionManufacturingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewFlyerReplacementManufacturingDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.NewFlyerReplacementManufacturingDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.NewFlyerReplacementManufacturingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewFlyerExpansionManufacturingDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.NewFlyerExpansionManufacturingDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.NewFlyerExpansionManufacturingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ElDoradoReplacementManufacturingDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.ElDoradoReplacementManufacturingDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.ElDoradoReplacementManufacturingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ElDoradoExpansionManufacturingDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.ElDoradoExpansionManufacturingDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.ElDoradoExpansionManufacturingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OtherReplacementManufacturingDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.OtherReplacementManufacturingDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.OtherReplacementManufacturingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OtherExpansionManufacturingDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.OtherExpansionManufacturingDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.OtherExpansionManufacturingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <h4>When (dates) are vehicles anticipated to be delivered to your facility?</h4>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GilligReplacementDeliveryDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.GilligReplacementDeliveryDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.GilligReplacementDeliveryDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GilligExpansionDeliveryDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.GilligExpansionDeliveryDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.GilligExpansionDeliveryDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewFlyerReplacementDeliveryDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.NewFlyerReplacementDeliveryDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.NewFlyerReplacementDeliveryDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewFlyerReplacementDeliveryDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.NewFlyerReplacementDeliveryDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.NewFlyerReplacementDeliveryDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ElDoradoReplacementDeliveryDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.ElDoradoReplacementDeliveryDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.ElDoradoReplacementDeliveryDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ElDoradoExpansionDeliveryDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.ElDoradoExpansionDeliveryDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.ElDoradoExpansionDeliveryDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OtherReplacementDeliveryDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.OtherReplacementDeliveryDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.OtherReplacementDeliveryDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OtherExpansionDeliveryDate, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.OtherExpansionDeliveryDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.OtherExpansionDeliveryDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <h3>Does your procurement agreement with your vehicle manufacturer include the following:</h3>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PreWireRequirements, htmlAttributes: new { @class = "control-label col-md-12 text-left-important" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.PreWireRequirements, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.PreWireRequirements, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IncludedCosts, htmlAttributes: new { @class = "control-label col-md-12 text-left-important" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.IncludedCosts, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            @Html.ValidationMessageFor(model => model.IncludedCosts, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>

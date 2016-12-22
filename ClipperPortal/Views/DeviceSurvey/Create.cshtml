@@ -1,0 +1,19 @@
+﻿@model ClipperPortal.Models.DeviceSurvey
+
+@{
+    ViewBag.Title = "Complete Device Survey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="device-survey details-page">
+    <h2>Complete Device Survey</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        Html.RenderPartial("_Content", Model);
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

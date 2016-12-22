@@ -1,5 +1,65 @@
 ﻿USE clipperreporting;
 
+DROP TABLE IF EXISTS `devicesurvey`;
+CREATE TABLE `devicesurvey` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `CalendarYear` text NOT NULL,
+  `Agency` text NOT NULL, -- Operator Name
+  `UserName` text NOT NULL, -- OperatorStaffName
+  `Email` text NOT NULL, -- OperatorEmail
+  `IsExpectingNewVehicles` bit(1) NOT NULL, -- Are you anticipating delivery of new vehicles in in this calendar year?
+  `HasGillig` bit NOT NULL DEFAULT 0,
+  `HasNewFlyer` bit NOT NULL DEFAULT 0,
+  `HasElDorado` bit NOT NULL DEFAULT 0,
+  `HasOther` bit NOT NULL DEFAULT 0,
+  `OtherName` text,
+  -- Gillig
+  `GilligNewVehicles` text,
+  `GilligNewModel` text,
+  `GilligReplacementVehicles` text,
+  `GilligReplacementManufacturingDate` text,
+  `GilligReplacementDeliveryDate` text,
+  `GilligExpansionVehicles` text,
+  `GilligExpansionManufacturingDate` text,
+  `GilligExpansionDeliveryDate` text,
+  -- New Flyer
+  `FlyerNewVehicles` text,
+  `NewFlyerNewModel` text,
+  `NewFlyerReplacementVehicles` text,
+  `NewFlyerReplacementManufacturingDate` text,
+  `NewFlyerReplacementDeliveryDate` text,
+  `NewFlyerExpansionVehicles` text,
+  `NewFlyerExpansionManufacturingDate` text,
+  `NewFlyerExpansionDeliveryDate` text,
+  -- El Dorado
+  `ElDoradoNewVehicles` text,
+  `ElDoradoNewModel` text,
+  `ElDoradoReplacementVehicles` text,
+  `ElDoradoReplacementManufacturingDate` text,
+  `ElDoradoReplacementDeliveryDate` text,
+  `ElDoradoExpansionVehicles` text,
+  `ElDoradoExpansionManufacturingDate` text,
+  `ElDoradoExpansionDeliveryDate` text,
+  -- Other
+  `OtherNewVehicles` text,
+  `OtherNewModel` text,
+  `OtherReplacementVehicles` text,
+  `OtherReplacementManufacturingDate` text,
+  `OtherReplacementDeliveryDate` text,
+  `OtherExpansionVehicles` text,
+  `OtherExpansionManufacturingDate` text,
+  `OtherExpansionDeliveryDate` text,
+   -- Do you own existing vehicles of the same/similar model?
+  `OwnExistingVehicles` bit NOT NULL DEFAULT 0,
+  `ExistingVehicleDetails` text, -- If yes, (and assuming the internal layout of the 2016 vehicle is similar to previous versions), will you be seeking to install Clipper® equipment in the same/similar location on the new vehicles?
+  `ReplacementVehicleDetails` text, -- No, specify the model and equipment placement details
+  `PreWireRequirements` text,
+  `IncludedCosts` text,
+  `RecordStatus` text NOT NULL,
+  `LastUpdated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `agencies`;
 CREATE TABLE `agencies` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,

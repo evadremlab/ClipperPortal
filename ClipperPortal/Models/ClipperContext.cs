@@ -15,6 +15,10 @@ namespace ClipperPortal.Models
         public DbSet<Agency> Agencies { get; set; }
         public DbSet<AuditRecord> AuditRecords { get; set; }
         public DbSet<Calendar> CalendarYears { get; set; }
+        public DbSet<DeviceSurvey> DeviceSurveys { get; set; }
+
+        // TODO: delete these later once DeviceSurvey is working
+
         public DbSet<ExpansionDetail> ExpansionDetails { get; set; }
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<ReplacementVehicle> ReplacementVehicles { get; set; }
@@ -35,6 +39,8 @@ namespace ClipperPortal.Models
         public override int SaveChanges()
         {
             var now = DateTime.UtcNow;
+            // TODO: also capture all fields for CREATE
+            // TODO: what about DELETE?
             var modifiedEntities = ChangeTracker.Entries().Where(p => p.State == EntityState.Modified).ToList();
 
             foreach (var entity in modifiedEntities)
