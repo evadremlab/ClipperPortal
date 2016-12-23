@@ -166,6 +166,9 @@ fieldset legend {
     cursor: pointer;
     margin-bottom: 10px;
 }
+.input-validation-error {
+    border: 2px solid red;
+}
 
 /* gridMvc tweaks */
 

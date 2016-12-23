@@ -4,12 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Clipper Portal" />
-    <title>@ViewBag.Title - ClipperPortal</title>
+    <title>ClipperPortal - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    <!--
-    <link rel="stylesheet" href="//www.guriddo.net/demo/css/trirand/ui.jqgrid-bootstrap.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    -->
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -43,14 +39,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <!--
-    <script src="//rawgit.com/free-jqgrid/jqGrid/master/js/i18n/grid.locale-en.js"></script>
-    <script>
-        $.jgrid = $.jgrid || {};
-        $.jgrid.no_legacy_api = true;
-    </script>
-    <script src="//rawgit.com/free-jqgrid/jqGrid/master/js/jquery.jqgrid.src.js"></script>
-    -->
     @RenderSection("scripts", required: false)
 </body>
 </html>

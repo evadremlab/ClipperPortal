@@ -7,10 +7,6 @@
 }
 
 <div class="form-horizontal">
-    @Html.HiddenFor(model => model.IsGilligNewVehiclesAndModelRequired)
-    @Html.HiddenFor(model => model.IsNewFlyerNewVehiclesAndModelRequired)
-    @Html.HiddenFor(model => model.IsElDoradoNewVehiclesAndModelRequired)
-    @Html.HiddenFor(model => model.IsOtherNewVehiclesAndModelRequired)
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
@@ -55,16 +51,16 @@
             <div class="form-group with-custom-label">
                 <div class="checkbox col-md-4">
                     <label>
-                        @Html.EditorFor(model => model.HasGillig) Gillig
+                        @Html.CheckBoxFor(model => model.HasGillig) Gillig
                     </label>
                     <label>
                         @Html.EditorFor(model => model.HasNewFlyer) New Flyer
                     </label>
                     <label>
-                        @Html.EditorFor(model => model.HasElDorado) El Dorado
+                        @Html.CheckBoxFor(model => model.HasElDorado) El Dorado
                     </label>
                     <label>
-                        @Html.EditorFor(model => model.HasOther) Other
+                        @Html.CheckBoxFor(model => model.HasOther) Other
                     </label>
                 </div>
                 <div class="col-md-8 @(Model.HasOther ? "" : HIDDEN)">
@@ -196,7 +192,7 @@
         <legend data-toggle="collapse" data-target="#ReplacementsOrAdditions" aria-expanded="true" aria-controls="ReplacementsOrAdditions">
             How may of these are vehicle replacements, or fleet additions?
         </legend>
-        
+
         <p><em>As a reminder to Clipper® operators, any additional vehicle equipment required for fleet expansion must be procured by MTC</em></p>
 
         <div id="ReplacementsOrAdditions" class="collapse in">

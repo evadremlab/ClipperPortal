@@ -23,13 +23,5 @@ namespace ClipperPortal.Services
                 return context.CalendarYears.ToList();
             }
         }
-
-        public static IEnumerable<Manufacturer> GetManufacturers()
-        {
-            using (var context = new ClipperContext())
-            {
-                return context.Manufacturers.ToList();
-            }
-        }
     }
 }

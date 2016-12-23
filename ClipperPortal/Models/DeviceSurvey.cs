@@ -6,9 +6,6 @@ using Foolproof;
 
 namespace ClipperPortal.Models
 {
-    /// <summary>
-    /// Holds properties that are mapped to the database.
-    /// </summary>
     [Table("devicesurvey")]
     public partial class DeviceSurvey
     {
@@ -31,7 +28,7 @@ namespace ClipperPortal.Models
         [Required(ErrorMessage = "field is required")]
         public string Email { get; set; }
 
-        // label is hardcoded in form
+        // label is hardcoded in form for styling
         [Display(Name = "Are you anticipating delivery of new vehicles in this calendar year?")]
         public bool IsExpectingNewVehicles { get; set; }
 
@@ -190,12 +187,12 @@ namespace ClipperPortal.Models
         [Display(Name = "Do you own existing vehicles of the same/similar model?")]
         public bool OwnExistingVehicles { get; set; }
 
-        // label is hardcoded in form
+        // label is hardcoded in form for styling
         [Display(Name = "Assuming the internal layout of the vehicle is similar to previous versions, will you be seeking to install Clipper® equipment in the same/similar location on the new vehicles?")]
         [RequiredIf("OwnExistingVehicles", true, ErrorMessage = "field is required")]
         public string ExistingVehicleDetails { get; set; }
 
-        // label is hardcoded in form
+        // label is hardcoded in form for styling
         [Display(Name = "Specify the model and equipment placement details")]
         [RequiredIf("OwnExistingVehicles", false, ErrorMessage = "field is required")]
         public string ReplacementVehicleDetails { get; set; }
@@ -206,11 +203,60 @@ namespace ClipperPortal.Models
         [Display(Name = "Has your vehicle manufacturer included costs associated with pre-wiring your vehicle in the agreed upon quote/procurement?")]
         public string IncludedCosts { get; set; }
 
+        [Display(Name = "Date Created")]
+        [Required(ErrorMessage = "field is required")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)] // EF will read, but let MySql insert
+        public DateTime DateCreated { get; set; }
+
         [Display(Name = "Last Updated")]
+        [Required(ErrorMessage = "field is required")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)] // EF will read, but let MySql insert
         public DateTime LastUpdated { get; set; }
 
         [Display(Name = "Record Status")]
         [Required(ErrorMessage = "field is required")]
         public string RecordStatus { get; set; }
+
+        [NotMapped]
+        public bool IsGilligNewVehiclesAndModelRequired
+        {
+            get { return this.IsExpectingNewVehicles && this.HasGillig; }
+        }
+
+        [NotMapped]
+        public bool IsNewFlyerNewVehiclesAndModelRequired
+        {
+            get { return this.IsExpectingNewVehicles && this.HasNewFlyer; }
+        }
+
+        [NotMapped]
+        public bool IsElDoradoNewVehiclesAndModelRequired
+        {
+            get { return this.IsExpectingNewVehicles && this.HasElDorado; }
+        }
+
+        [NotMapped]
+        public bool IsOtherNewVehiclesAndModelRequired
+        {
+            get { return this.IsExpectingNewVehicles && this.HasOther; }
+        }
+
+        [NotMapped]
+        public string HasGilligYN
+        {
+            get { return this.HasGillig ? "Y" : "N"; }
+        }
+
+        [NotMapped]
+        public string HasNewFlyerYN
+        {
+            get { return this.HasNewFlyer ? "Y" : "N"; }
+        }
+
+        [NotMapped]
+        public string HasElDoradoYN
+        {
+            get { return this.HasElDorado ? "Y" : "N"; }
+        }
     }
 }

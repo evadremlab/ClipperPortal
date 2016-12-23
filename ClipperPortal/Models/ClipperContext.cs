@@ -17,12 +17,6 @@ namespace ClipperPortal.Models
         public DbSet<Calendar> CalendarYears { get; set; }
         public DbSet<DeviceSurvey> DeviceSurveys { get; set; }
 
-        // TODO: delete these later once DeviceSurvey is working
-
-        public DbSet<ExpansionDetail> ExpansionDetails { get; set; }
-        public DbSet<Manufacturer> Manufacturers { get; set; }
-        public DbSet<ReplacementVehicle> ReplacementVehicles { get; set; }
-
         private object GetPrimaryKeyValue(DbEntityEntry entry)
         {
             var objectStateEntry = ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager.GetObjectStateEntry(entry.Entity);
@@ -71,6 +65,7 @@ namespace ClipperPortal.Models
                     }
                 }
             }
+
             return base.SaveChanges();
         }
     }

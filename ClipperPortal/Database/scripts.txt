@@ -56,7 +56,8 @@ CREATE TABLE `devicesurvey` (
   `PreWireRequirements` text,
   `IncludedCosts` text,
   `RecordStatus` text NOT NULL,
-  `LastUpdated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `DateCreated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `LastUpdated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
@@ -88,7 +89,7 @@ INSERT INTO agencies (ID, Name) VALUES ('17', 'WestCAT');
 DROP TABLE IF EXISTS `auditrecords`;
 CREATE TABLE `auditrecords` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `DateChanged` datetime(6) NOT NULL,
+  `DateChanged` timestamp NOT NULL,
   `EntityName` text,
   `PrimaryKeyValue` text,
   `PropertyName` text,

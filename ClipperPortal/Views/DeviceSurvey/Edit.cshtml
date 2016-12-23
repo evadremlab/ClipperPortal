@@ -1,7 +1,7 @@
 ﻿@model ClipperPortal.Models.DeviceSurvey
 
 @{
-    ViewBag.Title = "Clipper Device Survey";
+    ViewBag.Title = "Device Survey";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,15 +10,21 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        Html.RenderPartial("_Content", Model);
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.IsGilligNewVehiclesAndModelRequired)
+        @Html.HiddenFor(model => model.IsNewFlyerNewVehiclesAndModelRequired)
+        @Html.HiddenFor(model => model.IsElDoradoNewVehiclesAndModelRequired)
+        @Html.HiddenFor(model => model.IsOtherNewVehiclesAndModelRequired)
+        Html.RenderPartial("_Content");
     }
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
     <script type="text/javascript">
         $(function () {
-            //PageManager.bind();
+            $('.datetimepicker').datetimepicker();
         });
     </script>
 }

@@ -10,7 +10,6 @@ namespace ClipperPortal.Services
     {
         public SelectList Agencies { get; set; }
         public SelectList CalendarYears { get; set; }
-        public SelectList Manufacturers { get; set; }
         public SelectList RecordStatus { get; set; }
     }
 
@@ -20,7 +19,6 @@ namespace ClipperPortal.Services
         {
             var agencies = StaticDataProvider.GetAgencies();
             var calendarYears = StaticDataProvider.GetCalendarYears();
-            var manufacturers = StaticDataProvider.GetManufacturers();
 
             var recordStatus = new Dictionary<string, string>();
             recordStatus.Add("Planned", "Planned");
@@ -30,7 +28,6 @@ namespace ClipperPortal.Services
             {
                 Agencies = new SelectList(agencies, "Name", "Name"),
                 CalendarYears = new SelectList(calendarYears, "Name", "Name"),
-                Manufacturers = new SelectList(manufacturers, "Name", "Name"),
                 RecordStatus = new SelectList(recordStatus, "Key", "Value")
             };
         }

@@ -1,75 +1,120 @@
-﻿//using System;
-//using System.Web.Mvc;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
-//using ClipperPortal.Models;
-//using ClipperPortal.Services;
+using ClipperPortal.Models;
 
-//namespace ClipperPortal.Controllers
-//{
-//    public class DeviceSurveyController : Controller
-//    {
-//        // GET: DeviceSurvey
-//        public ActionResult Index()
-//        {
-//            var model = DeviceSurveyProvider.GetAll();
+namespace ClipperPortal.Controllers
+{
+    public class DeviceSurveyController : Controller
+    {
+        private ClipperContext db = new ClipperContext();
 
-//            return View(model);
-//        }
+        // GET: DeviceSurveyTest
+        public ActionResult Index()
+        {
+            return View(db.DeviceSurveys.ToList());
+        }
 
-//        // GET: ExpansionDetails/Create
-//        [HttpGet]
-//        public ActionResult Create()
-//        {
-//            var model = new DeviceSurvey();
+        // GET: DeviceSurveyTest/Create
+        public ActionResult Create()
+        {
+            return View(new DeviceSurvey());
+        }
 
-//            return View(model);
-//        }
+        // POST: DeviceSurveyTest/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ID,CalendarYear,Agency,UserName,Email,IsExpectingNewVehicles,HasGillig,HasNewFlyer,HasElDorado,HasOther,OtherName,GilligNewVehicles,GilligNewModel,GilligReplacementVehicles,GilligReplacementManufacturingDate,GilligReplacementDeliveryDate,GilligExpansionVehicles,GilligExpansionManufacturingDate,GilligExpansionDeliveryDate,FlyerNewVehicles,NewFlyerNewModel,NewFlyerReplacementVehicles,NewFlyerReplacementManufacturingDate,NewFlyerReplacementDeliveryDate,NewFlyerExpansionVehicles,NewFlyerExpansionManufacturingDate,NewFlyerExpansionDeliveryDate,ElDoradoNewVehicles,ElDoradoNewModel,ElDoradoReplacementVehicles,ElDoradoReplacementManufacturingDate,ElDoradoReplacementDeliveryDate,ElDoradoExpansionVehicles,ElDoradoExpansionManufacturingDate,ElDoradoExpansionDeliveryDate,OtherNewVehicles,OtherNewModel,OtherReplacementVehicles,OtherReplacementManufacturingDate,OtherReplacementDeliveryDate,OtherExpansionVehicles,OtherExpansionManufacturingDate,OtherExpansionDeliveryDate,OwnExistingVehicles,ExistingVehicleDetails,ReplacementVehicleDetails,PreWireRequirements,IncludedCosts,LastUpdated,RecordStatus")] DeviceSurvey deviceSurvey)
+        {
+            if (ModelState.IsValid)
+            {
+                db.DeviceSurveys.Add(deviceSurvey);
+                db.SaveChanges();
 
-//        // POST: ExpansionDDeviceSurveyetails/Create
-//        [HttpPost]
-//        public ActionResult Create([System.Web.Http.FromBody]DeviceSurvey data)
-//        {
-//            var statusMsg = "Saved Device Survey";
+                return RedirectToAction("Index");
+            }
 
-//            try
-//            {
-//                DeviceSurveyProvider.Create(data);
-//                TempData["Message"] = statusMsg;
-//            }
-//            catch (Exception ex)
-//            {
-//                TempData["ErrorMessage"] = statusMsg + ex.ToString();
-//                return View();
-//            }
+            return View(deviceSurvey);
+        }
 
-//            return RedirectToAction("Index");
-//        }
+        // GET: DeviceSurveyTest/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-//        // GET: DeviceSurvey/Edit/5
-//        public ActionResult Edit(int id)
-//        {
-//            var data = DeviceSurveyProvider.Get(id);
+            DeviceSurvey deviceSurvey = db.DeviceSurveys.Find(id);
 
-//            return View(data);
-//        }
+            if (deviceSurvey == null)
+            {
+                return HttpNotFound();
+            }
 
-//        // POST: DeviceSurvey/Edit/5
-//        [HttpPost]
-//        public ActionResult Edit(int id, [System.Web.Http.FromBody]DeviceSurvey data)
-//        {
-//            var statusMsg = "Updated Device Survey";
+            return View(deviceSurvey);
+        }
 
-//            try
-//            {
-//                DeviceSurveyProvider.Update(id, data);
-//                TempData["Message"] = statusMsg;
-//                return RedirectToAction("Index");
-//            }
-//            catch (Exception ex)
-//            {
-//                TempData["ErrorMessage"] = statusMsg + ex.ToString();
-//                return View();
-//            }
-//        }
-//    }
-//}
+        // POST: DeviceSurveyTest/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,CalendarYear,Agency,UserName,Email,IsExpectingNewVehicles,HasGillig,HasNewFlyer,HasElDorado,HasOther,OtherName,GilligNewVehicles,GilligNewModel,GilligReplacementVehicles,GilligReplacementManufacturingDate,GilligReplacementDeliveryDate,GilligExpansionVehicles,GilligExpansionManufacturingDate,GilligExpansionDeliveryDate,FlyerNewVehicles,NewFlyerNewModel,NewFlyerReplacementVehicles,NewFlyerReplacementManufacturingDate,NewFlyerReplacementDeliveryDate,NewFlyerExpansionVehicles,NewFlyerExpansionManufacturingDate,NewFlyerExpansionDeliveryDate,ElDoradoNewVehicles,ElDoradoNewModel,ElDoradoReplacementVehicles,ElDoradoReplacementManufacturingDate,ElDoradoReplacementDeliveryDate,ElDoradoExpansionVehicles,ElDoradoExpansionManufacturingDate,ElDoradoExpansionDeliveryDate,OtherNewVehicles,OtherNewModel,OtherReplacementVehicles,OtherReplacementManufacturingDate,OtherReplacementDeliveryDate,OtherExpansionVehicles,OtherExpansionManufacturingDate,OtherExpansionDeliveryDate,OwnExistingVehicles,ExistingVehicleDetails,ReplacementVehicleDetails,PreWireRequirements,IncludedCosts,LastUpdated,RecordStatus")] DeviceSurvey deviceSurvey)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(deviceSurvey).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(deviceSurvey);
+        }
+
+        //// GET: DeviceSurveyTest/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+
+        //    DeviceSurvey deviceSurvey = db.DeviceSurveys.Find(id);
+
+        //    if (deviceSurvey == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    return View(deviceSurvey);
+        //}
+
+        //// POST: DeviceSurveyTest/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    DeviceSurvey deviceSurvey = db.DeviceSurveys.Find(id);
+        //    db.DeviceSurveys.Remove(deviceSurvey);
+        //    db.SaveChanges();
+
+        //    return RedirectToAction("Index");
+        //}
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}
