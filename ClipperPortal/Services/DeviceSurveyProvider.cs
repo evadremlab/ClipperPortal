@@ -7,9 +7,11 @@ using ClipperPortal.Models;
 
 namespace ClipperPortal.Services
 {
-    public static class DeviceSurveyProvider
+    public class DeviceSurveyProvider
     {
-        public static IEnumerable<DeviceSurvey> GetAll()
+        private ClipperContext db = new ClipperContext();
+
+        public IEnumerable<DeviceSurvey> GetAll()
         {
             using (var context = new ClipperContext())
             {
@@ -17,7 +19,7 @@ namespace ClipperPortal.Services
             }
         }
 
-        public static DeviceSurvey Get(int id)
+        public DeviceSurvey Get(int id)
         {
             using (var context = new ClipperContext())
             {
@@ -25,7 +27,7 @@ namespace ClipperPortal.Services
             }
         }
 
-        public static void Create(DeviceSurvey data)
+        public void Create(DeviceSurvey data)
         {
             using (var context = new ClipperContext())
             {
@@ -34,7 +36,7 @@ namespace ClipperPortal.Services
             }
         }
 
-        public static void Update(int id, DeviceSurvey data)
+        public void Update(int id, DeviceSurvey data)
         {
             using (var context = new ClipperContext())
             {
@@ -43,7 +45,7 @@ namespace ClipperPortal.Services
             }
         }
 
-        public static void Delete(int id)
+        public void Delete(int id)
         {
             using (var context = new ClipperContext())
             {

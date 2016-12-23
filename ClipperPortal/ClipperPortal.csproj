@@ -157,6 +157,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DeviceSurveyController.cs" />
+    <Compile Include="Controllers\DeviceSurveyTestController.cs" />
     <Compile Include="Controllers\ExpansionDetailsController.cs" />
     <Compile Include="Controllers\ExpansionDetailsAPIController.cs" />
     <Compile Include="Controllers\ReplacementVehiclesController.cs" />
@@ -330,6 +331,12 @@
     <Content Include="Views\DeviceSurvey\_Content.cshtml" />
     <Content Include="Views\DeviceSurvey\Index.cshtml" />
     <Content Include="Views\DeviceSurvey\Edit.cshtml" />
+    <Content Include="Views\DeviceSurvey\TestCreate.cshtml" />
+    <Content Include="Views\DeviceSurveyTest\Create.cshtml" />
+    <Content Include="Views\DeviceSurveyTest\Delete.cshtml" />
+    <Content Include="Views\DeviceSurveyTest\Details.cshtml" />
+    <Content Include="Views\DeviceSurveyTest\Edit.cshtml" />
+    <Content Include="Views\DeviceSurveyTest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

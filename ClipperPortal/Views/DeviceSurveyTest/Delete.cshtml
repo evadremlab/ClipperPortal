@@ -1,0 +1,417 @@
+﻿@model ClipperPortal.Models.DeviceSurvey
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DeviceSurvey</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CalendarYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CalendarYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Agency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agency)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsExpectingNewVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsExpectingNewVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasGillig)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasGillig)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasNewFlyer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasNewFlyer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasElDorado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasElDorado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasOther)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasOther)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GilligNewVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GilligNewVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GilligNewModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GilligNewModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GilligReplacementVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GilligReplacementVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GilligReplacementManufacturingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GilligReplacementManufacturingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GilligReplacementDeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GilligReplacementDeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GilligExpansionVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GilligExpansionVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GilligExpansionManufacturingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GilligExpansionManufacturingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GilligExpansionDeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GilligExpansionDeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlyerNewVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlyerNewVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewFlyerNewModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewFlyerNewModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewFlyerReplacementVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewFlyerReplacementVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewFlyerReplacementManufacturingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewFlyerReplacementManufacturingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewFlyerReplacementDeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewFlyerReplacementDeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewFlyerExpansionVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewFlyerExpansionVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewFlyerExpansionManufacturingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewFlyerExpansionManufacturingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewFlyerExpansionDeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewFlyerExpansionDeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElDoradoNewVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElDoradoNewVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElDoradoNewModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElDoradoNewModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElDoradoReplacementVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElDoradoReplacementVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElDoradoReplacementManufacturingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElDoradoReplacementManufacturingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElDoradoReplacementDeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElDoradoReplacementDeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElDoradoExpansionVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElDoradoExpansionVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElDoradoExpansionManufacturingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElDoradoExpansionManufacturingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElDoradoExpansionDeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElDoradoExpansionDeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherNewVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherNewVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherNewModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherNewModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherReplacementVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherReplacementVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherReplacementManufacturingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherReplacementManufacturingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherReplacementDeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherReplacementDeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherExpansionVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherExpansionVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherExpansionManufacturingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherExpansionManufacturingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherExpansionDeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherExpansionDeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnExistingVehicles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnExistingVehicles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExistingVehicleDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExistingVehicleDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReplacementVehicleDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReplacementVehicleDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PreWireRequirements)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PreWireRequirements)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncludedCosts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncludedCosts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecordStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecordStatus)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

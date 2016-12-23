@@ -31,5 +31,23 @@ namespace ClipperPortal.Models
         {
             get { return this.IsExpectingNewVehicles && this.HasOther; }
         }
+
+        [NotMapped]
+        public string HasGilligYN
+        {
+            get { return this.HasGillig ? "Y" : "N"; }
+        }
+
+        [NotMapped]
+        public string HasNewFlyerYN
+        {
+            get { return this.HasNewFlyer ? "Y" : "N"; }
+        }
+
+        [NotMapped]
+        public string HasElDoradoYN
+        {
+            get { return this.HasElDorado ? "Y" : "N"; }
+        }
     }
 }

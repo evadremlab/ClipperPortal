@@ -154,6 +154,18 @@ input.full-width {
 .wrap-agency {
     max-width: 18rem;
 }
+.with-custom-label label {
+    font-weight: bold;
+    padding-right: 1rem;
+}
+.full-width-important {
+    width: 100%;
+    max-width: 100% !important;
+}
+fieldset legend {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
 
 /* gridMvc tweaks */
 
