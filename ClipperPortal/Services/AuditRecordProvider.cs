@@ -16,11 +16,11 @@ namespace ClipperPortal.Services
             }
         }
 
-        public static void Create(AuditRecord data)
+        public static void Create(AuditRecord auditRecord)
         {
             using (var context = new ClipperContext())
             {
-                context.AuditRecords.Add(data);
+                context.AuditRecords.Add(auditRecord);
                 context.SaveChanges();
             }
         }

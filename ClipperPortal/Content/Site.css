@@ -163,7 +163,6 @@ input.full-width {
     max-width: 100% !important;
 }
 fieldset legend {
-    cursor: pointer;
     margin-bottom: 10px;
 }
 .input-validation-error {

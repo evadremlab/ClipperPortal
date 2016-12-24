@@ -64,42 +64,42 @@ var PageManager = (function () {
         return $(selector).get(0);
     }
 
-    function setVisibility(selector, hide) {
-        if (hide) {
-            $(selector).addClass('hidden');
-        } else {
+    function setVisibility(selector, isVisible) {
+        console.log(selector);
+
+        if (isVisible) {
             $(selector).removeClass('hidden');
-        }
-    }
-
-    function hideshowOtherManufacturer(manufacturer) {
-        var hide = manufacturer !== 'other';
-        setVisibility('.other-manufacturer', hide);
-        if (hide) {
-            $('#OtherManufacturer').val('');
-        }
-    }
-
-    function hideshowExistingVehicleDetails(isChecked) {
-        setVisibility('.existing-vehicle-details', !isChecked);
-        setVisibility('.replacement-vehicle-details', isChecked);
-        if (isChecked) {
-            $('#ReplacementVehicleDetails').val('');
         } else {
-            $('#ExistingVehicleDetails').val('');
+            $(selector).addClass('hidden');
         }
     }
 
-    function bindManufacturer() {
-        $('#Manufacturer').on('change', function () {
-            hideshowOtherManufacturer($(this).val());
-        });
-    }
+    function toggleManufacturerDetails(manufacturer) {
+        var isChecked = $(this).is(':checked');
+        var selector = '.{0}'.format(manufacturer.toLowerCase());
 
-    function bindHaveExistingVehicles() {
-        $('#HaveExistingVehicles').on('change', function () {
-            hideshowExistingVehicleDetails($(this).prop('checked'));
-        });
+        setVisibility(selector, isChecked);
+
+        if (manufacturer === 'Other') {
+            setVisibility('.other-name', isChecked);
+        }
+
+        if (!isChecked) {
+            $.each(['Replacement', 'Expansion'], function (outerIndex, outerItem) {
+                $.each(['Vehicles', 'ManufacturingDate', 'DeliveryDate'], function (innerIndex, innerItem) {
+                    selector = '.{0}{1}{2}'.format(manufacturer, outerItem, innerItem);
+                    console.log(selector);
+                    $(selector).val('');
+                });
+            });
+            $.each(['NewVehicles', 'NewModel'], function (index, item) {
+                selector = '.{0}{1}'.format(manufacturer, item);
+                console.log(selector);
+                if (!isChecked) {
+                    $(selector).val('');
+                }
+            });
+        }
     }
 
     function startStatusMessageTimer() {
@@ -120,13 +120,12 @@ var PageManager = (function () {
     function ajaxDelete(recordType) {
         var $el = $(this);
         var $row = $el.closest('tr');
-        var id = $row.find('td.hidden').text(); // assumes that ID is a hidden field
+        var id = $row.find('td.primary-key').text();
+        var url = '/api/{0}API/{1}'.format(recordType, id);
         $.ajax({
             type: 'DELETE',
-            url: '/api/{0}sAPI/{1}'.format(recordType, id),
+            url: url,
             success: function (result) {
-                //showStatusMessage(result.Status);
-                //$row.hide(); // so we don't have to refresh the page (but it messes up table striping)
                 window.location.reload();
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -136,34 +135,30 @@ var PageManager = (function () {
     }
 
     function bind() {
-        $('.datetimepicker').datetimepicker();
-
-        if (isPage('.expansion-details')) {
-            if (isPage('.details-page')) {
-                bindManufacturer();
-                bindHaveExistingVehicles();
-            } else if (isPage('.list-page')) {
+        if (isPage('.device-survey')) {
+            if (isPage('.list-page')) {
                 $('.btn-delete').on('click', function () {
-                    if (confirm('Delete this Expansion Detail?')) {
-                        ajaxDelete.call(this, 'ExpansionDetail');
-                    }
-                });
-            }
-        } else if (isPage('.replacement-vehicles')) {
-            if (isPage('.details-page')) {
-                bindManufacturer();
-            } else if (isPage('.list-page')) {
-                $('.btn-delete').on('click', function () {
-                    if (confirm('Delete this Replacement Vehicle?')) {
-                        ajaxDelete.call(this, 'ReplacementVehicle');
+                    if (confirm('Delete this DeviceSurvey?')) {
+                        ajaxDelete.call(this, 'DeviceSurvey');
                     }
                 });
             }
         }
     }
 
+    function toggle(item) {
+        var isChecked = $(this).is(':checked');
+
+        if (item === 'ExpectingNewVehicles') {
+            setVisibility('.expecting-new-vehicles', isChecked);
+        } else {
+            toggleManufacturerDetails.call(this, item);
+        }
+    }
+
     return {
         bind: bind,
+        toggle: toggle,
         startStatusMessageTimer: startStatusMessageTimer
     };
 })();

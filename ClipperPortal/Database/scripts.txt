@@ -4,14 +4,13 @@ DROP TABLE IF EXISTS `devicesurvey`;
 CREATE TABLE `devicesurvey` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `CalendarYear` text NOT NULL,
-  `Agency` text NOT NULL, -- Operator Name
-  `UserName` text NOT NULL, -- OperatorStaffName
-  `Email` text NOT NULL, -- OperatorEmail
-  `IsExpectingNewVehicles` bit(1) NOT NULL, -- Are you anticipating delivery of new vehicles in in this calendar year?
-  `HasGillig` bit NOT NULL DEFAULT 0,
-  `HasNewFlyer` bit NOT NULL DEFAULT 0,
-  `HasElDorado` bit NOT NULL DEFAULT 0,
-  `HasOther` bit NOT NULL DEFAULT 0,
+  `Agency` text NOT NULL,
+  `UserName` text,
+  `Email` text,
+  `HasGillig` bit(1) NOT NULL DEFAULT 0,
+  `HasNewFlyer` bit(1) NOT NULL DEFAULT 0,
+  `HasElDorado` bit(1) NOT NULL DEFAULT 0,
+  `HasOther` bit(1) NOT NULL DEFAULT 0,
   `OtherName` text,
   -- Gillig
   `GilligNewVehicles` text,
@@ -23,7 +22,7 @@ CREATE TABLE `devicesurvey` (
   `GilligExpansionManufacturingDate` text,
   `GilligExpansionDeliveryDate` text,
   -- New Flyer
-  `FlyerNewVehicles` text,
+  `NewFlyerNewVehicles` text,
   `NewFlyerNewModel` text,
   `NewFlyerReplacementVehicles` text,
   `NewFlyerReplacementManufacturingDate` text,
@@ -49,8 +48,7 @@ CREATE TABLE `devicesurvey` (
   `OtherExpansionVehicles` text,
   `OtherExpansionManufacturingDate` text,
   `OtherExpansionDeliveryDate` text,
-   -- Do you own existing vehicles of the same/similar model?
-  `OwnExistingVehicles` bit NOT NULL DEFAULT 0,
+  `IsExpectingNewVehicles` bit(1) NOT NULL DEFAULT 0, -- Are you anticipating delivery of new vehicles in in this calendar year?
   `ExistingVehicleDetails` text, -- If yes, (and assuming the internal layout of the 2016 vehicle is similar to previous versions), will you be seeking to install Clipper® equipment in the same/similar location on the new vehicles?
   `ReplacementVehicleDetails` text, -- No, specify the model and equipment placement details
   `PreWireRequirements` text,
@@ -68,23 +66,26 @@ CREATE TABLE `agencies` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
+TRUNCATE TABLE agencies;
 INSERT INTO agencies (ID, Name) VALUES ('1', 'AC Transit');
 INSERT INTO agencies (ID, Name) VALUES ('2', 'County Connection');
-INSERT INTO agencies (ID, Name) VALUES ('3', 'Eastern Contra Costa Transit Authority');
-INSERT INTO agencies (ID, Name) VALUES ('4', 'FAST');
-INSERT INTO agencies (ID, Name) VALUES ('5', 'GGT');
-INSERT INTO agencies (ID, Name) VALUES ('6', 'LAVTA');
-INSERT INTO agencies (ID, Name) VALUES ('7', 'Marin Transit');
-INSERT INTO agencies (ID, Name) VALUES ('8', 'NVTA');
-INSERT INTO agencies (ID, Name) VALUES ('9', 'Petaluma Transit');
-INSERT INTO agencies (ID, Name) VALUES ('10', 'SamTrams');
-INSERT INTO agencies (ID, Name) VALUES ('11', 'SFMTA');
-INSERT INTO agencies (ID, Name) VALUES ('12', 'Santa Rosa City Bus');
-INSERT INTO agencies (ID, Name) VALUES ('13', 'SolTrans');
-INSERT INTO agencies (ID, Name) VALUES ('14', 'Sonoma County Transit');
-INSERT INTO agencies (ID, Name) VALUES ('15', 'Vacaville City Coach');
-INSERT INTO agencies (ID, Name) VALUES ('16', 'VTA');
-INSERT INTO agencies (ID, Name) VALUES ('17', 'WestCAT');
+INSERT INTO agencies (ID, Name) VALUES ('3', 'Central Contra Costa Transit Authority');
+INSERT INTO agencies (ID, Name) VALUES ('4', 'Eastern Contra Costa Transit Authority');
+INSERT INTO agencies (ID, Name) VALUES ('5', 'FAST');
+INSERT INTO agencies (ID, Name) VALUES ('6', 'GGT');
+INSERT INTO agencies (ID, Name) VALUES ('7', 'LAVTA');
+INSERT INTO agencies (ID, Name) VALUES ('8', 'Marin Transit');
+INSERT INTO agencies (ID, Name) VALUES ('9', 'NVTA');
+INSERT INTO agencies (ID, Name) VALUES ('10', 'Petaluma Transit');
+INSERT INTO agencies (ID, Name) VALUES ('11', 'SamTrams');
+INSERT INTO agencies (ID, Name) VALUES ('12', 'SFMTA');
+INSERT INTO agencies (ID, Name) VALUES ('13', 'Santa Rosa City Bus');
+INSERT INTO agencies (ID, Name) VALUES ('14', 'SolTrans');
+INSERT INTO agencies (ID, Name) VALUES ('15', 'Sonoma County Transit');
+INSERT INTO agencies (ID, Name) VALUES ('16', 'Union City Transit');
+INSERT INTO agencies (ID, Name) VALUES ('17', 'Vacaville City Coach');
+INSERT INTO agencies (ID, Name) VALUES ('18', 'VTA');
+INSERT INTO agencies (ID, Name) VALUES ('19', 'WestCAT');
 
 DROP TABLE IF EXISTS `auditrecords`;
 CREATE TABLE `auditrecords` (
@@ -106,58 +107,12 @@ CREATE TABLE `calendaryears` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
+TRUNCATE TABLE calendaryears;
 INSERT INTO calendaryears (ID, Name) VALUES ('1', 'Jan - Dec 2016');
 INSERT INTO calendaryears (ID, Name) VALUES ('2', 'Jan - Dec 2017');
 INSERT INTO calendaryears (ID, Name) VALUES ('3', 'Jan - Dec 2018');
 INSERT INTO calendaryears (ID, Name) VALUES ('4', 'Jan - Dec 2019');
 INSERT INTO calendaryears (ID, Name) VALUES ('5', 'Jan - Dec 2020');
-
-DROP TABLE IF EXISTS `expansiondetails`;
-CREATE TABLE `expansiondetails` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `AdditionalVehicleCount` int(11) NOT NULL,
-  `Agency` text NOT NULL,
-  `CalendarYear` text,
-  `DeliveryDate` datetime(6) NOT NULL,
-  `HaveExistingVehicles` bit(1) NOT NULL,
-  `ExistingVehicleDetails` TEXT,	-- changed
-  `IncludedCosts` text,
-  `Manufacturer` text,
-  `ManufacturingDate` datetime(6) NOT NULL,
-  `OtherManufacturer` text,
-  `PreWireRequirements` text,
-  `ReplacementVehicleDetails` text,
-  `VehicleCount` int(11) NOT NULL,
-  `UserName` text,
-  `RecordStatus` text,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `manufacturers`;
-CREATE TABLE `manufacturers` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` text,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-
-INSERT INTO manufacturers (ID, Name) VALUES ('1', 'Gillig');
-INSERT INTO manufacturers (ID, Name) VALUES ('2', 'New Flyer');
-INSERT INTO manufacturers (ID, Name) VALUES ('3', 'El Dorado');
-INSERT INTO manufacturers (ID, Name) VALUES ('4', 'other');
-
-DROP TABLE IF EXISTS `replacementvehicles`;
-CREATE TABLE `replacementvehicles` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Agency` text NOT NULL,
-  `CalendarYear` text,
-  `Manufacturer` text,
-  `OtherManufacturer` text,
-  `VehicleCount` int(11) NOT NULL,
-  `VehicleModel` text,
-  `UserName` text,
-  `RecordStatus` text,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 DELIMITER ;;
 DROP PROCEDURE IF EXISTS `getmatrix`

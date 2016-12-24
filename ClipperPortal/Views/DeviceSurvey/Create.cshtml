@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="device-survey details-page">
+<div class="device-survey details-page">
     <h2>Device Survey</h2>
     @using (Html.BeginForm())
     {
@@ -19,7 +19,7 @@
 
     <script type="text/javascript">
         $(function () {
-            $('.datetimepicker').datetimepicker();
+            PageManager.bind();
         });
     </script>
 }

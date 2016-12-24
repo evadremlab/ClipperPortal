@@ -1,0 +1,22 @@
+﻿
+-- run this after import of csv file into new table
+
+USE clipper;
+
+ALTER TABLE devicesurvey
+ADD PRIMARY KEY (`ID`) ;
+
+ALTER TABLE devicesurvey
+CHANGE COLUMN `ID` `ID` INT(11) NOT NULL AUTO_INCREMENT,
+CHANGE COLUMN `HasGillig` `HasGillig` BIT(1) NOT NULL DEFAULT 0, 
+CHANGE COLUMN `HasNewFlyer` `HasNewFlyer` BIT(1) NOT NULL DEFAULT 0, 
+CHANGE COLUMN `HasElDorado` `HasElDorado` BIT(1) NOT NULL DEFAULT 0, 
+CHANGE COLUMN `HasOther` `HasOther` BIT(1) NOT NULL DEFAULT 0, 
+CHANGE COLUMN `IsExpectingNewVehicles` `IsExpectingNewVehicles`BIT(1) NOT NULL DEFAULT 0, 
+DROP COLUMN `OwnExistingVehicles`, 
+DROP COLUMN `LastUpdated`, 
+DROP COLUMN `DateCreated` ;
+
+ALTER TABLE devicesurvey
+ADD COLUMN DateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+ADD COLUMN LastUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ;

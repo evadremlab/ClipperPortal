@@ -11,19 +11,29 @@
 
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 
+    @{ Html.RenderPartial("_StatusMessage"); }
+
     @Html.Grid(Model).Named("deviceSurveyGrid").Columns(columns =>
     {
-        columns.Add(x => x.ID).Css("hidden");
+        columns.Add(x => x.ID).Css("primary-key hidden");
         columns.Add(x => x.CalendarYear).Titled("Calendar Year").Sortable(true);
         columns.Add(x => x.Agency).Titled("Operator").Sortable(true);
-        columns.Add(x => x.HasGilligYN).Titled("Gillig").Sortable(true);
-        columns.Add(x => x.HasNewFlyerYN).Titled("New Flyer").Sortable(true);
-        columns.Add(x => x.HasElDoradoYN).Titled("El Dorado").Sortable(true);
+        columns.Add(x => x.HasGilligYN).Titled("Gillig").SetWidth("4rem").Sortable(true);
+        columns.Add(x => x.HasNewFlyerYN).Titled("New Flyer").SetWidth("4rem").Sortable(true);
+        columns.Add(x => x.HasElDoradoYN).Titled("El Dorado").SetWidth("4rem").Sortable(true);
         columns.Add(x => x.OtherName).Titled("Other").Sortable(true);
         columns.Add(x => x.RecordStatus).Titled("Record Status").Sortable(true);
-        columns.Add(x => x.DateCreated).Titled("Created").Sortable(true);
-        columns.Add(x => x.LastUpdated).Titled("Updated").Sortable(true);
+        columns.Add(x => x.DateCreated).Titled("Created").SetWidth("9rem").Sortable(true);
+        columns.Add(x => x.LastUpdated).Titled("Updated").SetWidth("9rem").Sortable(true);
         columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => Html.ActionLink("Edit", "Edit", new { id = x.ID }, new { @class = "btn btn-primary btn-xs" }));
         columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => @<button class="btn btn-danger btn-xs btn-delete" data-id="@x.ID">Delete</button>);
     }).WithPaging(15)
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            PageManager.bind();
+        });
+    </script>
+}

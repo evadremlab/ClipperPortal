@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 using Foolproof;
+using ClipperPortal.Extensions;
 
 namespace ClipperPortal.Models
 {
@@ -25,7 +26,6 @@ namespace ClipperPortal.Models
         public string UserName { get; set; }
 
         [Display(Name = "Operator Staff Email")]
-        [Required(ErrorMessage = "field is required")]
         public string Email { get; set; }
 
         // label is hardcoded in form for styling
@@ -58,61 +58,61 @@ namespace ClipperPortal.Models
         public string GilligNewModel { get; set; }
 
         [Display(Name = "Gillig Vehicle Replacement")]
-        [RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
         public string GilligReplacementVehicles { get; set; }
 
         [Display(Name = "Gillig Vehicle Replacement")]
-        [RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
         public string GilligReplacementManufacturingDate { get; set; }
 
         [Display(Name = "Gillig Vehicle Replacement")]
-        [RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
         public string GilligReplacementDeliveryDate { get; set; }
 
         [Display(Name = "Gillig Fleet Expansion")]
-        [RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
         public string GilligExpansionVehicles { get; set; }
 
         [Display(Name = "Gillig Fleet Expansion")]
-        [RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
         public string GilligExpansionManufacturingDate { get; set; }
 
         [Display(Name = "Gillig Fleet Expansion")]
-        [RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasGillig", true, ErrorMessage = "field is required")]
         public string GilligExpansionDeliveryDate { get; set; }
         #endregion
 
         #region NewFlyer
         [Display(Name = "New Flyer")]
         [RequiredIf("IsNewFlyerNewVehiclesAndModelRequired", true, ErrorMessage = "field is required")]
-        public string FlyerNewVehicles { get; set; }
+        public string NewFlyerNewVehicles { get; set; }
 
         [Display(Name = "New Flyer")]
         [RequiredIf("IsNewFlyerNewVehiclesAndModelRequired", true, ErrorMessage = "field is required")]
         public string NewFlyerNewModel { get; set; }
 
         [Display(Name = "New Flyer Vehicle Replacement")]
-        [RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
         public string NewFlyerReplacementVehicles { get; set; }
 
         [Display(Name = "New Flyer Vehicle Replacement")]
-        [RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
         public string NewFlyerReplacementManufacturingDate { get; set; }
 
         [Display(Name = "New Flyer Vehicle Replacement")]
-        [RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
         public string NewFlyerReplacementDeliveryDate { get; set; }
 
         [Display(Name = "New Flyer Fleet Expansion")]
-        [RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
         public string NewFlyerExpansionVehicles { get; set; }
 
         [Display(Name = "New Flyer Fleet Expansion")]
-        [RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
         public string NewFlyerExpansionManufacturingDate { get; set; }
 
         [Display(Name = "New Flyer Fleet Expansion")]
-        [RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasNewFlyer", true, ErrorMessage = "field is required")]
         public string NewFlyerExpansionDeliveryDate { get; set; }
         #endregion
 
@@ -126,27 +126,27 @@ namespace ClipperPortal.Models
         public string ElDoradoNewModel { get; set; }
 
         [Display(Name = "El Dorado Vehicle Replacement")]
-        [RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
         public string ElDoradoReplacementVehicles { get; set; }
 
         [Display(Name = "El Dorado Vehicle Replacement")]
-        [RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
         public string ElDoradoReplacementManufacturingDate { get; set; }
 
         [Display(Name = "El Dorado Vehicle Replacement")]
-        [RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
         public string ElDoradoReplacementDeliveryDate { get; set; }
 
         [Display(Name = "El Dorado Fleet Expansion")]
-        [RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
         public string ElDoradoExpansionVehicles { get; set; }
 
         [Display(Name = "El Dorado Fleet Expansion")]
-        [RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
         public string ElDoradoExpansionManufacturingDate { get; set; }
 
         [Display(Name = "El Dorado Fleet Expansion")]
-        [RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasElDorado", true, ErrorMessage = "field is required")]
         public string ElDoradoExpansionDeliveryDate { get; set; }
         #endregion
 
@@ -160,41 +160,38 @@ namespace ClipperPortal.Models
         public string OtherNewModel { get; set; }
 
         [Display(Name = "Other - Vehicle Replacement")]
-        [RequiredIf("HasOther", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasOther", true, ErrorMessage = "field is required")]
         public string OtherReplacementVehicles { get; set; }
 
         [Display(Name = "Other - Vehicle Replacement")]
-        [RequiredIf("HasOther", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasOther", true, ErrorMessage = "field is required")]
         public string OtherReplacementManufacturingDate { get; set; }
 
         [Display(Name = "Other - Vehicle Replacement")]
-        [RequiredIf("HasOther", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasOther", true, ErrorMessage = "field is required")]
         public string OtherReplacementDeliveryDate { get; set; }
 
         [Display(Name = "Other - Fleet Expansion")]
-        [RequiredIf("HasOther", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasOther", true, ErrorMessage = "field is required")]
         public string OtherExpansionVehicles { get; set; }
 
         [Display(Name = "Other - Fleet Expansion")]
-        [RequiredIf("HasOther", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasOther", true, ErrorMessage = "field is required")]
         public string OtherExpansionManufacturingDate { get; set; }
 
         [Display(Name = "Other - Fleet Expansion")]
-        [RequiredIf("HasOther", true, ErrorMessage = "field is required")]
+        //[RequiredIf("HasOther", true, ErrorMessage = "field is required")]
         public string OtherExpansionDeliveryDate { get; set; }
         #endregion
 
-        [Display(Name = "Do you own existing vehicles of the same/similar model?")]
-        public bool OwnExistingVehicles { get; set; }
-
         // label is hardcoded in form for styling
-        [Display(Name = "Assuming the internal layout of the vehicle is similar to previous versions, will you be seeking to install Clipper® equipment in the same/similar location on the new vehicles?")]
-        [RequiredIf("OwnExistingVehicles", true, ErrorMessage = "field is required")]
+        [Display(Name = "If YES, (and assuming the internal layout of the vehicle is similar to previous versions), will you be seeking to install Clipper® equipment in the same/similar location on the new vehicles?")]
+        //[RequiredIf("OwnExistingVehicles", true, ErrorMessage = "field is required")]
         public string ExistingVehicleDetails { get; set; }
 
         // label is hardcoded in form for styling
-        [Display(Name = "Specify the model and equipment placement details")]
-        [RequiredIf("OwnExistingVehicles", false, ErrorMessage = "field is required")]
+        [Display(Name = "If NO, specify the model and equipment placement details")]
+        //[RequiredIf("OwnExistingVehicles", false, ErrorMessage = "field is required")]
         public string ReplacementVehicleDetails { get; set; }
 
         [Display(Name = "Does it specify Clipper® pre-wire requirements as part of the scope of work?")]
@@ -244,19 +241,19 @@ namespace ClipperPortal.Models
         [NotMapped]
         public string HasGilligYN
         {
-            get { return this.HasGillig ? "Y" : "N"; }
+            get { return this.HasGillig ? "Y" : ""; }
         }
 
         [NotMapped]
         public string HasNewFlyerYN
         {
-            get { return this.HasNewFlyer ? "Y" : "N"; }
+            get { return this.HasNewFlyer ? "Y" : ""; }
         }
 
         [NotMapped]
         public string HasElDoradoYN
         {
-            get { return this.HasElDorado ? "Y" : "N"; }
+            get { return this.HasElDorado ? "Y" : ""; }
         }
     }
 }
