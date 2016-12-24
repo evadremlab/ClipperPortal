@@ -27,7 +27,7 @@
         columns.Add(x => x.LastUpdated).Titled("Updated").SetWidth("9rem").Sortable(true);
         columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => Html.ActionLink("Edit", "Edit", new { id = x.ID }, new { @class = "btn btn-primary btn-xs" }));
         columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => @<button class="btn btn-danger btn-xs btn-delete" data-id="@x.ID">Delete</button>);
-    }).WithPaging(15)
+    }).WithPaging(10)
 </div>
 
 @section Scripts {

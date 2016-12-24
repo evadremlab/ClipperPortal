@@ -36,7 +36,10 @@ namespace ClipperPortal.Services
 
                 foreach (var prop in deviceSurvey.GetType().GetProperties())
                 {
-                    // TODO: don't track DateCreated and LastUpdated
+                    if (prop.Name == "DateCreated" || prop.Name == "LastUpdated")
+                    {
+                        continue;
+                    }
 
                     var currentValue = prop.GetValue(deviceSurvey, null);
                     var currentStringValue = currentValue == null ? "" : currentValue.ToString();

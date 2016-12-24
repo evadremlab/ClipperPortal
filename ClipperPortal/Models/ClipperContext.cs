@@ -53,7 +53,10 @@ namespace ClipperPortal.Models
 
                 foreach (var propName in entity.OriginalValues.PropertyNames)
                 {
-                    // TODO: don't track DateCreated and LastUpdated
+                    if (propName == "DateCreated" || propName == "LastUpdated")
+                    {
+                        continue;
+                    }
 
                     var currentValue = getStringValue(entity.CurrentValues[propName]);
                     var originalValue = getStringValue(databaseValues.GetValue<object>(propName));
