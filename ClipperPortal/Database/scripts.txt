@@ -92,6 +92,7 @@ CREATE TABLE `auditrecords` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `DateChanged` timestamp NOT NULL,
   `EntityName` text,
+  `RecordType` text,
   `PrimaryKeyValue` text,
   `PropertyName` text,
   `OldValue` text,

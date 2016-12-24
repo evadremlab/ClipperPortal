@@ -33,11 +33,19 @@ namespace ClipperPortal.Models
         public override int SaveChanges()
         {
             var now = DateTime.UtcNow;
-            // TODO: also capture all fields for CREATE
-            // TODO: what about DELETE?
-            var modifiedEntities = ChangeTracker.Entries().Where(p => p.State == EntityState.Modified).ToList();
 
-            foreach (var entity in modifiedEntities)
+            _TrackUpdated(now);
+            _TrackDeleted(now);
+            // Create tracking is done in DeviceSurveyProvider
+
+            return base.SaveChanges();
+        }
+
+        private void _TrackUpdated(DateTime now)
+        {
+            var entities = ChangeTracker.Entries().Where(p => p.State == EntityState.Modified).ToList();
+
+            foreach (var entity in entities)
             {
                 var primaryKey = GetPrimaryKeyValue(entity);
                 var entityName = entity.Entity.GetType().Name;
@@ -45,6 +53,8 @@ namespace ClipperPortal.Models
 
                 foreach (var propName in entity.OriginalValues.PropertyNames)
                 {
+                    // TODO: don't track DateCreated and LastUpdated
+
                     var currentValue = getStringValue(entity.CurrentValues[propName]);
                     var originalValue = getStringValue(databaseValues.GetValue<object>(propName));
 
@@ -54,6 +64,7 @@ namespace ClipperPortal.Models
                         {
                             EntityName = entityName,
                             PrimaryKeyValue = primaryKey.ToString(),
+                            RecordType = "Updated",
                             PropertyName = propName,
                             OldValue = originalValue,
                             NewValue = currentValue,
@@ -65,8 +76,28 @@ namespace ClipperPortal.Models
                     }
                 }
             }
+        }
 
-            return base.SaveChanges();
+        private void _TrackDeleted(DateTime now)
+        {
+            var entities = ChangeTracker.Entries().Where(p => p.State == EntityState.Deleted).ToList();
+
+            foreach (var entity in entities)
+            {
+                var primaryKey = GetPrimaryKeyValue(entity);
+                var entityName = entity.Entity.GetType().Name;
+
+                var auditRecord = new AuditRecord()
+                {
+                    EntityName = entityName,
+                    PrimaryKeyValue = primaryKey.ToString(),
+                    RecordType = "Deleted",
+                    DateChanged = now,
+                    UserName = string.Empty
+                };
+
+                AuditRecords.Add(auditRecord);
+            }
         }
     }
 }

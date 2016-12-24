@@ -27,9 +27,35 @@ namespace ClipperPortal.Services
 
         public static void Create(DeviceSurvey deviceSurvey)
         {
+            var now = DateTime.UtcNow;
+
             using (var context = new ClipperContext())
             {
                 context.DeviceSurveys.Add(deviceSurvey);
+                context.SaveChanges(); // so we get the primary key of the created record
+
+                foreach (var prop in deviceSurvey.GetType().GetProperties())
+                {
+                    // TODO: don't track DateCreated and LastUpdated
+
+                    var currentValue = prop.GetValue(deviceSurvey, null);
+                    var currentStringValue = currentValue == null ? "" : currentValue.ToString();
+
+                    var auditRecord = new AuditRecord()
+                    {
+                        EntityName = "DeviceSurvey",
+                        PrimaryKeyValue = deviceSurvey.ID.ToString(),
+                        RecordType = "Created",
+                        PropertyName = prop.Name,
+                        OldValue = null,
+                        NewValue = currentStringValue,
+                        DateChanged = now,
+                        UserName = string.Empty
+                    };
+
+                    context.AuditRecords.Add(auditRecord);
+                }
+
                 context.SaveChanges();
             }
         }

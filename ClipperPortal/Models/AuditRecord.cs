@@ -16,6 +16,9 @@ namespace ClipperPortal.Models
         [Display(Name = "ID")]
         public string PrimaryKeyValue { get; set; }
 
+        [Display(Name = "Record Type")]
+        public string RecordType { get; set; }
+
         [Display(Name = "Property")]
         public string PropertyName { get; set; }
 

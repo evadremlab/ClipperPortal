@@ -16,7 +16,7 @@ namespace ClipperPortal
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Reports", action = "Matrix", id = UrlParameter.Optional }
+                defaults: new { controller = "DeviceSurvey", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
