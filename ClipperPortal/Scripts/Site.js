@@ -55,10 +55,10 @@ String.prototype.padLeft = function (width) {
 }
 
 /*	--------------------------------------------------
-	PageManager
+	PageController
 	-------------------------------------------------- */
 
-var PageManager = (function () {
+var PageController = (function () {
 
     function isPage(selector) {
         return $(selector).get(0);
@@ -82,6 +82,9 @@ var PageManager = (function () {
 
         if (manufacturer === 'Other') {
             setVisibility('.other-name', isChecked);
+            if (!isChecked) {
+                $('#OtherName').val('');
+            }
         }
 
         if (!isChecked) {
@@ -136,7 +139,16 @@ var PageManager = (function () {
 
     function bind() {
         if (isPage('.device-survey')) {
-            if (isPage('.list-page')) {
+            if (isPage('.details-page')) {
+                $('#IsExpectingNewVehicles').on('change', function () {
+                    if (!$(this).is(':checked')) {
+                        $('#GilligNewVehicles, #GilligNewModel').val('');
+                        $('#NewFlyerNewVehicles, #NewFlyerNewModel').val('');
+                        $('#ElDoradoNewVehicles, #ElDoradoNewModel').val('');
+                        $('#OtherNewVehicles, #OtherNewModel').val('');
+                    }
+                });
+            } else if (isPage('.list-page')) {
                 $('.btn-delete').on('click', function () {
                     if (confirm('Delete this DeviceSurvey?')) {
                         ajaxDelete.call(this, 'DeviceSurvey');

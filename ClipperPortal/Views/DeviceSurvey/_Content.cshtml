@@ -50,16 +50,16 @@
         <div class="form-group with-custom-label">
             <div class="checkbox col-md-4">
                 <label>
-                    @Html.CheckBoxFor(model => model.HasGillig, new { @onClick = "PageManager.toggle.call(this, 'Gillig');" }) Gillig
+                    @Html.CheckBoxFor(model => model.HasGillig, new { @onClick = "PageController.toggle.call(this, 'Gillig');" }) Gillig
                 </label>
                 <label>
-                    @Html.CheckBoxFor(model => model.HasNewFlyer, new { @onClick = "PageManager.toggle.call(this, 'NewFlyer');" }) New Flyer
+                    @Html.CheckBoxFor(model => model.HasNewFlyer, new { @onClick = "PageController.toggle.call(this, 'NewFlyer');" }) New Flyer
                 </label>
                 <label>
-                    @Html.CheckBoxFor(model => model.HasElDorado, new { @onClick = "PageManager.toggle.call(this, 'ElDorado');" }) El Dorado
+                    @Html.CheckBoxFor(model => model.HasElDorado, new { @onClick = "PageController.toggle.call(this, 'ElDorado');" }) El Dorado
                 </label>
                 <label>
-                    @Html.CheckBoxFor(model => model.HasOther, new { @onClick = "PageManager.toggle.call(this, 'Other');" }) Other
+                    @Html.CheckBoxFor(model => model.HasOther, new { @onClick = "PageController.toggle.call(this, 'Other');" }) Other
                 </label>
             </div>
             @{
@@ -80,7 +80,7 @@
         <div class="form-group with-custom-label">
             <div class="checkbox col-md-12">
                 <label>
-                    @Html.CheckBoxFor(model => model.IsExpectingNewVehicles, new { @onClick = "PageManager.toggle.call(this, 'ExpectingNewVehicles')" }) Are you anticipating delivery of new vehicles in this calendar year?
+                    @Html.CheckBoxFor(model => model.IsExpectingNewVehicles, new { @onClick = "PageController.toggle.call(this, 'ExpectingNewVehicles')" }) Are you anticipating delivery of new vehicles in this calendar year?
                 </label>
             </div>
         </div>

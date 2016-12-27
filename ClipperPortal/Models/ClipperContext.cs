@@ -14,7 +14,7 @@ namespace ClipperPortal.Models
 
         public DbSet<Agency> Agencies { get; set; }
         public DbSet<AuditRecord> AuditRecords { get; set; }
-        public DbSet<Calendar> CalendarYears { get; set; }
+        public DbSet<CalendarYear> CalendarYears { get; set; }
         public DbSet<DeviceSurvey> DeviceSurveys { get; set; }
 
         private object GetPrimaryKeyValue(DbEntityEntry entry)
@@ -67,7 +67,7 @@ namespace ClipperPortal.Models
                         {
                             EntityName = entityName,
                             PrimaryKeyValue = primaryKey.ToString(),
-                            RecordType = "Updated",
+                            Action = "Updated",
                             PropertyName = propName,
                             OldValue = originalValue,
                             NewValue = currentValue,
@@ -94,7 +94,7 @@ namespace ClipperPortal.Models
                 {
                     EntityName = entityName,
                     PrimaryKeyValue = primaryKey.ToString(),
-                    RecordType = "Deleted",
+                    Action = "Deleted",
                     DateChanged = now,
                     UserName = string.Empty
                 };

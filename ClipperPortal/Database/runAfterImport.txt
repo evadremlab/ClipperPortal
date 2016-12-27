@@ -1,7 +1,4 @@
-﻿
--- run this after import of csv file into new table
-
-USE clipper;
+﻿USE clipper;
 
 ALTER TABLE devicesurvey
 ADD PRIMARY KEY (`ID`) ;

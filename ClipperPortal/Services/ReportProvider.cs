@@ -34,7 +34,11 @@ namespace ClipperPortal.Services
 
                             data.Populate(reader);
 
-                            list.Add(data);
+                            // exclude any CalendarYears without data
+                            if (!string.IsNullOrEmpty(data.Agency))
+                            {
+                                list.Add(data);
+                            }
                         }
                     }
 

@@ -21,11 +21,16 @@ namespace ClipperPortal
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/respond.min.js",
                       "~/Scripts/moment.min.js",
                       "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bootstrap-datetimepicker.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                      "~/Scripts/respond.min.js",
+                      "~/Scripts/Widgets/agency-filter-widget.js",
+                      "~/Scripts/Widgets/calendar-year-filter-widget.js",
+                      "~/Scripts/Widgets/record-status-filter-widget.js",
                       "~/Scripts/gridmvc.min.js",
-                      "~/Scripts/bootstrap-datetimepicker.min.js",
                       "~/Scripts/Site.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

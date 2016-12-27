@@ -13,7 +13,7 @@ namespace ClipperPortal.Services
         {
             using (var context = new ClipperContext())
             {
-                return context.DeviceSurveys.ToList();
+                return context.DeviceSurveys.OrderBy(x => x.CalendarYear).ThenBy(x => x.Agency).ThenBy(x => x.RecordStatus).ToList();
             }
         }
 
@@ -48,7 +48,7 @@ namespace ClipperPortal.Services
                     {
                         EntityName = "DeviceSurvey",
                         PrimaryKeyValue = deviceSurvey.ID.ToString(),
-                        RecordType = "Created",
+                        Action = "Created",
                         PropertyName = prop.Name,
                         OldValue = null,
                         NewValue = currentStringValue,

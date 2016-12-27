@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ClipperPortal.Models
 {
     [Table("calendaryears")]
-    public class Calendar
+    public class CalendarYear
     {
         [Key]
         public int ID { get; set; }

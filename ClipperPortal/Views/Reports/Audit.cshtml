@@ -9,7 +9,7 @@
 
 <h2>Reports</h2>
 
-<p class="hidden">
+<p>
     @Html.ActionLink("Matrix", "Matrix", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Audit Records", "Audit", null, new { @class = "btn btn-primary" })
 </p>
@@ -18,7 +18,7 @@
 {
     columns.Add(x => x.EntityName).Titled("Entity").Sortable(true).ThenSortBy(x => x.PrimaryKeyValue);
     columns.Add(x => x.PrimaryKeyValue).Titled("ID");
-    columns.Add(x => x.RecordType).Titled("Record Type").Sortable(true);
+    columns.Add(x => x.Action).Titled("Action").Sortable(true);
     columns.Add(x => x.PropertyName).Titled("Property").Sortable(true);
     columns.Add(x => x.OldValue).Titled("Old Value").Sortable(true);
     columns.Add(x => x.NewValue).Titled("New Value").Sortable(true);

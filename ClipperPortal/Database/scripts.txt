@@ -92,7 +92,7 @@ CREATE TABLE `auditrecords` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `DateChanged` timestamp NOT NULL,
   `EntityName` text,
-  `RecordType` text,
+  `Action` text,
   `PrimaryKeyValue` text,
   `PropertyName` text,
   `OldValue` text,
@@ -120,29 +120,33 @@ DROP PROCEDURE IF EXISTS `getmatrix`
 ;;
 CREATE PROCEDURE `getmatrix`()
 BEGIN
-	SELECT	Agency, 
-			CalendarYear, 
-			SUM(ReplacementVehicleCount) AS ReplacementVehicleCount, 
-			SUM(ExpansionVehicleCount) AS ExpansionVehicleCount,
-			RecordStatus
-	FROM
-		(
-			SELECT	a.Name AS Agency, 
-					rv.CalendarYear, 
-					IFNULL(rv.VehicleCount, 0) AS ReplacementVehicleCount, 
-					0 AS ExpansionVehicleCount,
-					rv.RecordStatus 
-			FROM agencies a
-			LEFT JOIN replacementvehicles rv ON rv.Agency = a.Name
-			UNION ALL
-			SELECT	a.Name AS Agency, 
-					ed.CalendarYear, 
-					0 AS ReplacementVehicleCount,
-					IFNULL(ed.VehicleCount, 0) AS ExpansionVehicleCount, 
-					ed.RecordStatus 
-			FROM agencies a
-			LEFT JOIN expansiondetails ed ON ed.Agency = a.Name
-		) AA
-	GROUP BY Agency, CalendarYear, RecordStatus;
+	SELECT Agency, CalendarYear, RecordStatus,
+		IF(SUM(NewVehicles) > 0, 'Y', '') AS NewVehicles,
+		IF(SUM(ReplacementVehicles) > 0, 'Y', '') AS ReplacementVehicles,
+		IF(SUM(ExpansionVehicles) > 0, 'Y', '') AS ExpansionVehicles
+	FROM (SELECT
+		Agency,
+		cal.Name AS CalendarYear,
+		RecordStatus,
+		-- New Vehicles
+		IF(!HasGillig OR GilligNewVehicles IS NULL, 0, 1) +
+		IF(!HasNewFlyer OR NewFlyerNewVehicles IS NULL, 0, 1) +
+		IF(!HasElDorado OR ElDoradoNewVehicles IS NULL, 0, 1) +
+		IF(!HasOther OR OtherNewVehicles IS NULL, 0, 1) AS NewVehicles,
+		-- Replacement Vehicles
+		IF(!HasGillig OR GilligReplacementVehicles IS NULL, 0, 1) +
+		IF(!HasNewFlyer OR NewFlyerReplacementVehicles IS NULL, 0, 1) +
+		IF(!HasElDorado OR ElDoradoReplacementVehicles IS NULL, 0, 1) +
+		IF(!HasOther OR OtherReplacementVehicles IS NULL, 0, 1) AS ReplacementVehicles,
+		-- ExpansionVehicles
+		IF(!HasGillig OR GilligExpansionVehicles IS NULL, 0, 1) +
+		IF(!HasNewFlyer OR NewFlyerExpansionVehicles IS NULL, 0, 1) +
+		IF(!HasElDorado OR ElDoradoExpansionVehicles IS NULL, 0, 1) +
+		IF(!HasOther OR OtherExpansionVehicles IS NULL, 0, 1) AS ExpansionVehicles
+		FROM calendaryears cal
+		LEFT OUTER JOIN devicesurvey d ON d.CalendarYear = cal.Name
+	) AA
+	GROUP BY CalendarYear, Agency, RecordStatus
+	ORDER BY CalendarYear, Agency, RecordStatus;
 END
 ;;

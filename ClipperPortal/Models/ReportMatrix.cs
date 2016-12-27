@@ -14,22 +14,26 @@ namespace ClipperPortal.Models
 
         public string Agency { get; set; }
 
-        [Display(Name = "Expansion Vehicles")]
-        public int ExpansionVehicleCount { get; set; }
-
-        [Display(Name = "Replacement Vehicles")]
-        public int ReplacementVehicleCount { get; set; }
-
         [Display(Name = "Record Status")]
         public string RecordStatus { get; set; }
+
+        [Display(Name = "New Vehicles")]
+        public string NewVehicles { get; set; }
+
+        [Display(Name = "Expansion Vehicles")]
+        public string ExpansionVehicles { get; set; }
+
+        [Display(Name = "Replacement Vehicles")]
+        public string ReplacementVehicles { get; set; }
 
         public void Populate(MySqlDataReader reader)
         {
             this.CalendarYear = reader.GetValueOfType<string>("CalendarYear");
             this.Agency = reader.GetValueOfType<string>("Agency");
-            this.ExpansionVehicleCount = reader.GetValueOfType<int>("ExpansionVehicleCount");
-            this.ReplacementVehicleCount = reader.GetValueOfType<int>("ReplacementVehicleCount");
             this.RecordStatus = reader.GetValueOfType<string>("RecordStatus");
+            this.NewVehicles = reader.GetValueOfType<string>("NewVehicles");
+            this.ExpansionVehicles = reader.GetValueOfType<string>("ExpansionVehicles");
+            this.ReplacementVehicles = reader.GetValueOfType<string>("ReplacementVehicles");
         }
     }
 }

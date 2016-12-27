@@ -16,7 +16,7 @@ namespace ClipperPortal.Services
             }
         }
 
-        public static IEnumerable<Calendar> GetCalendarYears()
+        public static IEnumerable<CalendarYear> GetCalendarYears()
         {
             using (var context = new ClipperContext())
             {
