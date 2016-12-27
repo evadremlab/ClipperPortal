@@ -51,7 +51,7 @@ namespace ClipperPortal.Models
         public string OtherName {
             get
             {
-                return this.HasOther ? string.Empty : otherName;
+                return this.HasOther ? otherName : string.Empty;
             }
             set
             {
