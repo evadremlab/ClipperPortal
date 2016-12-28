@@ -38,7 +38,7 @@ function RecordStatusFilterWidget() {
         this.value = values.length > 0 ? values[0] : { filterType: 1, filterValue: "" };
 
         this.renderWidget(); //onRender filter widget
-        this.fillRecordStatuses(["Planned", "Completed"]); // with static data
+        this.loadRecordStatuses(); //load data from the server
         this.registerEvents(); //handle events
     };
     this.renderWidget = function () {
@@ -47,13 +47,29 @@ function RecordStatusFilterWidget() {
         this.container.append(html);
     };
     /***
+    * Method loads data from the server via Ajax:
+    */
+    this.loadRecordStatuses = function () {
+        var $this = this;
+        var data = PageController.cachedRecordStatuses || [];
+
+        if (data.length === 0) {
+            $.get("/api/Lookup/RecordStatuses", function (data) {
+                $this.fillRecordStatuses(data);
+                PageController.cachedRecordStatuses = data;
+            });
+        } else {
+            $this.fillRecordStatuses(data);
+        }
+    };
+    /***
     * Method fills select list with data.
     */
     this.fillRecordStatuses = function (items) {
         var list = this.container.find(".list");
         for (var i = 0; i < items.length; i++) {
-            var selected = items[i] === this.value.filterValue ? ' selected="selected"' : '';
-            list.append('<option{0} value="{1}">{1}</option>'.format(selected, items[i]));
+            var selected = items[i].Name === PageController.filterValue ? ' selected="selected"' : '';
+            list.append('<option{0} value="{1}">{1}</option>'.format(selected, items[i].Name));
         }
     };
     /***

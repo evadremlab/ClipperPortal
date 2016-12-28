@@ -4,20 +4,30 @@
 @{
     ViewBag.Title = "Device Surveys";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var filter = string.Empty;
+
+    if (Request.QueryString["grid-filter"] != null)
+    {
+        var filterString = Request.QueryString["grid-filter"];
+        filter = filterString.Replace("__", "|").Split('|')[2];
+    }
 }
 
 <div class="device-survey list-page">
     <h2>Device Survey</h2>
 
+
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Export to CSV", "Export", null, new { @class = "btn btn-info pull-right btn-export" })
 
     @{ Html.RenderPartial("_StatusMessage"); }
 
     @Html.Grid(Model).Named("deviceSurveyGrid").Columns(columns =>
     {
         columns.Add(x => x.ID).Css("primary-key hidden");
-        columns.Add(x => x.CalendarYear).Titled("Calendar Year").SetWidth("4rem").Sortable(true).Filterable(true).SetFilterWidgetType("CalendarYearFilterWidget");
         columns.Add(x => x.Agency).Titled("Operator").Sortable(true).Filterable(true).SetFilterWidgetType("AgencyFilterWidget");
+        columns.Add(x => x.CalendarYear).Titled("Calendar Year").SetWidth("4rem").Sortable(true).Filterable(true).SetFilterWidgetType("CalendarYearFilterWidget");
         columns.Add(x => x.HasGilligYN).Titled("Gillig").SetWidth("4rem").Sortable(true);
         columns.Add(x => x.HasNewFlyerYN).Titled("New Flyer").SetWidth("4rem").Sortable(true);
         columns.Add(x => x.HasElDoradoYN).Titled("El Dorado").SetWidth("4rem").Sortable(true);
@@ -34,9 +44,15 @@
     <script type="text/javascript">
         $(function () {
             PageController.bind();
+            PageController.filterValue = '@filter';
             pageGrids.deviceSurveyGrid.addFilterWidget(new AgencyFilterWidget());
             pageGrids.deviceSurveyGrid.addFilterWidget(new CalendarYearFilterWidget());
             pageGrids.deviceSurveyGrid.addFilterWidget(new RecordStatusFilterWidget());
+
+            $('.btn-export').click(function (evt) {
+                evt.preventDefault();
+                window.open('/DeviceSurvey/Export');
+            });
         });
     </script>
 }

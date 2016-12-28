@@ -18,15 +18,25 @@
     </div>
 
     <div class="form-group">
+        @if (Model.ID == 0)
+        {
+            @Html.LabelFor(model => model.Agency, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.Agency, lookupData.Agencies, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Agency, "", new { @class = "text-danger" })
+            </div>
+        }
+        else
+        {
+            @Html.LabelFor(model => model.Agency, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4 display-only">
+                @Html.DisplayFor(model => model.Agency)
+            </div>
+        }
         @Html.LabelFor(model => model.CalendarYear, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-4">
             @Html.DropDownListFor(model => model.CalendarYear, lookupData.CalendarYears, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.CalendarYear, "", new { @class = "text-danger" })
-        </div>
-        @Html.LabelFor(model => model.Agency, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-4">
-            @Html.DropDownListFor(model => model.Agency, lookupData.Agencies, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Agency, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -163,12 +173,12 @@
         </legend>
         <h4>Do you own existing vehicles of the same/similar model?</h4>
         @*<div class="form-group with-custom-label">
-            <div class="checkbox col-md-12">
-                <label>
-                    @Html.CheckBoxFor(model => model.OwnExistingVehicles) 
-                </label>
-            </div>
-        </div>*@
+                <div class="checkbox col-md-12">
+                    <label>
+                        @Html.CheckBoxFor(model => model.OwnExistingVehicles)
+                    </label>
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.ExistingVehicleDetails, htmlAttributes: new { @class = "control-label col-md-12 text-left-important" })
@@ -398,7 +408,7 @@
     </fieldset>
 
     <fieldset>
-        <legend >Procurement</legend>
+        <legend>Procurement</legend>
         <h4>Does your procurement agreement with your vehicle manufacturer include the following:</h4>
 
         <div class="form-group">

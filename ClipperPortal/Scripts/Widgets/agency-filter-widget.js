@@ -68,7 +68,7 @@ function AgencyFilterWidget() {
     this.fillAgencies = function (items) {
         var list = this.container.find(".list");
         for (var i = 0; i < items.length; i++) {
-            var selected = items[i] === this.value.filterValue ? ' selected="selected"' : '';
+            var selected = items[i].Name === PageController.filterValue ? ' selected="selected"' : '';
             list.append('<option{0} value="{1}">{1}</option>'.format(selected, items[i].Name));
         }
     };

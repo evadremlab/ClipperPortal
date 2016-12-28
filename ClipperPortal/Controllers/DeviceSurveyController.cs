@@ -2,10 +2,14 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web.Mvc;
 
 using ClipperPortal.Models;
 using ClipperPortal.Services;
+using System.IO.Pipes;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace ClipperPortal.Controllers
 {
@@ -71,6 +75,24 @@ namespace ClipperPortal.Controllers
             }
 
             return View(deviceSurvey);
+        }
+
+        // GET DeviceSurvey/Export
+        public FileContentResult Export()
+        {
+            var csvExport = new CSVExporter();
+
+            foreach (var deviceSurvey in DeviceSurveyProvider.GetAll())
+            {
+                csvExport.AddRow();
+
+                foreach (var prop in deviceSurvey.GetType().GetProperties())
+                {
+                    csvExport[prop.Name] = prop.GetValue(deviceSurvey, null);
+                }
+            }
+
+            return File(new UTF8Encoding().GetBytes(csvExport.Export()), "text/csv", "DeviceSurvey.csv");
         }
     }
 }

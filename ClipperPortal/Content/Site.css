@@ -107,14 +107,6 @@ ol.round li.three {
     background: url("../Images/orderedList3.png") no-repeat;
 }
 
-/* tabs */
-#report-tabs li a {
-    font-weight: bold;
-}
-#report-tabs li.active a {
-    background-color: #ddd;
-}
-
 table .buttons {
     width: 12rem;
     text-align: right;
@@ -143,6 +135,16 @@ input.full-width {
 .field-validation-error::before {
     content: "* "
 }
+
+/* gridMvc tweaks */
+
+table.grid-table tr.grid-row-selected td {
+    background: inherit !important;
+    color: inherit;
+}
+
+/* Misc stuff */
+
 .status-message {
     font-size: 80%;
     font-weight: bold;
@@ -150,9 +152,6 @@ input.full-width {
 }
 .error-message {
     color: red;
-}
-.wrap-agency {
-    max-width: 18rem;
 }
 .with-custom-label label {
     font-weight: bold;
@@ -168,12 +167,8 @@ fieldset legend {
 .input-validation-error {
     border: 2px solid red;
 }
-
-/* gridMvc tweaks */
-
-table.grid-table tr.grid-row-selected td {
-    background: inherit !important;
-    color: inherit;
+.display-only {
+    padding-top: 0.7rem;
 }
 
 @media print {
