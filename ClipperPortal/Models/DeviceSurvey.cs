@@ -15,13 +15,13 @@ namespace ClipperPortal.Models
         [Key]
         public int ID { get; set; }
 
-        [Display(Name = "Calendar Year")]
-        [Required(ErrorMessage = "field is required")]
-        public string CalendarYear { get; set; }
-
         [Display(Name = "Operator")]
         [Required(ErrorMessage = "field is required")]
         public string Agency { get; set; }
+
+        [Display(Name = "Calendar Year")]
+        [Required(ErrorMessage = "field is required")]
+        public string CalendarYear { get; set; }
 
         [Display(Name = "Operator Staff Name")]
         [Required(ErrorMessage = "field is required")]

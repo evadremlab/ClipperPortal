@@ -12,6 +12,7 @@
 <p>
     @Html.ActionLink("Matrix", "Matrix", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Audit Records", "Audit", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Export to CSV", "Export", null, new { @class = "btn btn-info pull-right btn-export" })
 </p>
 
 @Html.Grid(Model).Columns(columns =>
@@ -24,3 +25,14 @@
     columns.Add(x => x.NewValue).Titled("New Value").Sortable(true);
     columns.Add(x => x.DateChanged).Titled("Date Changed").Sortable(true);
 }).WithPaging(15);
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.btn-export').click(function (evt) {
+                evt.preventDefault();
+                window.open('/Reports/ExportAudit');
+            });
+        });
+    </script>
+}

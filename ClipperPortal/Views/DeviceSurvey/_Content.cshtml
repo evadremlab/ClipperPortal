@@ -28,6 +28,7 @@
         }
         else
         {
+            @Html.HiddenFor(model => model.Agency)
             @Html.LabelFor(model => model.Agency, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4 display-only">
                 @Html.DisplayFor(model => model.Agency)

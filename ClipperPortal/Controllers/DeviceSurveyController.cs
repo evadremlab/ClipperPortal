@@ -80,6 +80,7 @@ namespace ClipperPortal.Controllers
         // GET DeviceSurvey/Export
         public FileContentResult Export()
         {
+            string displayName;
             var csvExport = new CSVExporter();
 
             foreach (var deviceSurvey in DeviceSurveyProvider.GetAll())
@@ -88,7 +89,43 @@ namespace ClipperPortal.Controllers
 
                 foreach (var prop in deviceSurvey.GetType().GetProperties())
                 {
-                    csvExport[prop.Name] = prop.GetValue(deviceSurvey, null);
+                    if (prop.Name == "ID") continue;
+
+                    switch (prop.Name)
+                    {
+                        case "Agency":
+                            displayName = "Operator";
+                            break;
+                        case "CalendarYear":
+                            displayName = "Calendar Year";
+                            break;
+                        case "HasGilligYN":
+                            displayName = "Gillig";
+                            break;
+                        case "HasNewFlyerYN":
+                            displayName = "NewFlyer";
+                            break;
+                        case "HasElDoradoYN":
+                            displayName = "ElDorado";
+                            break;
+                        case "OtherName":
+                            displayName = "Other";
+                            break;
+                        case "RecordStatus":
+                            displayName = "Record Status";
+                            break;
+                        case "DateCreated":
+                            displayName = "Date Created";
+                            break;
+                        case "LastUpdated":
+                            displayName = "Last Updated";
+                            break;
+                        default:
+                            displayName = prop.Name;
+                            break;
+                    }
+
+                    csvExport[displayName] = prop.GetValue(deviceSurvey, null);
                 }
             }
 

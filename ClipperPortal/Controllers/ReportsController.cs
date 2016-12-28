@@ -24,9 +24,56 @@ namespace ClipperPortal.Controllers
             return View(model);
         }
 
+        // GET Report/ExportAudit
+        public FileContentResult ExportAudit()
+        {
+            string displayName;
+            var csvExport = new CSVExporter();
+
+            foreach (var auditRecord in AuditRecordProvider.GetAll())
+            {
+                csvExport.AddRow();
+
+                foreach (var prop in auditRecord.GetType().GetProperties())
+                {
+                    switch (prop.Name) {
+                        case "EntityName":
+                            displayName = "Entity";
+                            break;
+                        case "PrimaryKeyValue":
+                            displayName = "ID";
+                            break;
+                        case "PropertyName":
+                            displayName = "Property";
+                            break;
+                        case "OldValue":
+                            displayName = "Old Value";
+                            break;
+                        case "NewValue":
+                            displayName = "New Value";
+                            break;
+                        case "DateChanged":
+                            displayName = "Date Changed";
+                            break;
+                        case "UserName":
+                            displayName = "Changed By";
+                            break;
+                        default:
+                            displayName = prop.Name;
+                            break;
+                    }
+
+                    csvExport[displayName] = prop.GetValue(auditRecord, null);
+                }
+            }
+
+            return File(new UTF8Encoding().GetBytes(csvExport.Export()), "text/csv", "AuditRecords.csv");
+        }
+
         // GET Report/ExportMatrix
         public FileContentResult ExportMatrix()
         {
+            string displayName;
             var csvExport = new CSVExporter();
 
             foreach (var reportMatrix in ReportProvider.GetMatrix())
@@ -35,7 +82,32 @@ namespace ClipperPortal.Controllers
 
                 foreach (var prop in reportMatrix.GetType().GetProperties())
                 {
-                    csvExport[prop.Name] = prop.GetValue(reportMatrix, null);
+                    switch (prop.Name)
+                    {
+                        case "CalendarYear":
+                            displayName = "Calendar Year";
+                            break;
+                        case "Agency":
+                            displayName = "Operator";
+                            break;
+                        case "RecordStatus":
+                            displayName = "Record Status";
+                            break;
+                        case "NewVehicles":
+                            displayName = "New Vehicles";
+                            break;
+                        case "ExpansionVehicles":
+                            displayName = "Expansion Vehicles";
+                            break;
+                        case "ReplacementVehicles":
+                            displayName = "Replacement Vehicles";
+                            break;
+                        default:
+                            displayName = prop.Name;
+                            break;
+                    }
+
+                    csvExport[displayName] = prop.GetValue(reportMatrix, null);
                 }
             }
 

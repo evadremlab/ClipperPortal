@@ -9,10 +9,11 @@ namespace ClipperPortal.Models
 {
     public class ReportMatrix
     {
+        [Display(Name = "Operator")]
+        public string Agency { get; set; }
+
         [Display(Name = "Calendar Year")]
         public string CalendarYear { get; set;}
-
-        public string Agency { get; set; }
 
         [Display(Name = "Record Status")]
         public string RecordStatus { get; set; }
