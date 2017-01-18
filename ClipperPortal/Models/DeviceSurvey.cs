@@ -15,13 +15,12 @@ namespace ClipperPortal.Models
         [Key]
         public int ID { get; set; }
 
-        [Display(Name = "Operator")]
         [Required(ErrorMessage = "field is required")]
-        public string Agency { get; set; }
+        public string Operator { get; set; }
 
-        [Display(Name = "Calendar Year")]
+        [Display(Name = "Reporting Period")]
         [Required(ErrorMessage = "field is required")]
-        public string CalendarYear { get; set; }
+        public string ReportingPeriod { get; set; }
 
         [Display(Name = "Operator Staff Name")]
         [Required(ErrorMessage = "field is required")]
@@ -62,14 +61,14 @@ namespace ClipperPortal.Models
         #region Gillig
         [Display(Name = "Gillig")]
         [RequiredIf("IsGilligNewVehiclesAndModelRequired", true, ErrorMessage = "field is required")]
-        public string GilligNewVehicles { get; set; }
+        public int GilligNewVehicles { get; set; }
 
         [Display(Name = "Gillig")]
         [RequiredIf("IsGilligNewVehiclesAndModelRequired", true, ErrorMessage = "field is required")]
         public string GilligNewModel { get; set; }
 
         [Display(Name = "Gillig Vehicle Replacement")]
-        public string GilligReplacementVehicles { get; set; }
+        public int GilligReplacementVehicles { get; set; }
 
         [Display(Name = "Gillig Vehicle Replacement")]
         public string GilligReplacementManufacturingDate { get; set; }
@@ -78,7 +77,7 @@ namespace ClipperPortal.Models
         public string GilligReplacementDeliveryDate { get; set; }
 
         [Display(Name = "Gillig Fleet Expansion")]
-        public string GilligExpansionVehicles { get; set; }
+        public int GilligExpansionVehicles { get; set; }
 
         [Display(Name = "Gillig Fleet Expansion")]
         public string GilligExpansionManufacturingDate { get; set; }
@@ -90,14 +89,14 @@ namespace ClipperPortal.Models
         #region NewFlyer
         [Display(Name = "New Flyer")]
         [RequiredIf("IsNewFlyerNewVehiclesAndModelRequired", true, ErrorMessage = "field is required")]
-        public string NewFlyerNewVehicles { get; set; }
+        public int NewFlyerNewVehicles { get; set; }
 
         [Display(Name = "New Flyer")]
         [RequiredIf("IsNewFlyerNewVehiclesAndModelRequired", true, ErrorMessage = "field is required")]
         public string NewFlyerNewModel { get; set; }
 
         [Display(Name = "New Flyer Vehicle Replacement")]
-        public string NewFlyerReplacementVehicles { get; set; }
+        public int NewFlyerReplacementVehicles { get; set; }
 
         [Display(Name = "New Flyer Vehicle Replacement")]
         public string NewFlyerReplacementManufacturingDate { get; set; }
@@ -106,7 +105,7 @@ namespace ClipperPortal.Models
         public string NewFlyerReplacementDeliveryDate { get; set; }
 
         [Display(Name = "New Flyer Fleet Expansion")]
-        public string NewFlyerExpansionVehicles { get; set; }
+        public int NewFlyerExpansionVehicles { get; set; }
 
         [Display(Name = "New Flyer Fleet Expansion")]
         public string NewFlyerExpansionManufacturingDate { get; set; }
@@ -118,14 +117,14 @@ namespace ClipperPortal.Models
         #region ElDorado
         [Display(Name = "El Dorado")]
         [RequiredIf("IsElDoradoNewVehiclesAndModelRequired", true, ErrorMessage = "field is required")]
-        public string ElDoradoNewVehicles { get; set; }
+        public int ElDoradoNewVehicles { get; set; }
 
         [Display(Name = "El Dorado")]
         [RequiredIf("IsElDoradoNewVehiclesAndModelRequired", true, ErrorMessage = "field is required")]
         public string ElDoradoNewModel { get; set; }
 
         [Display(Name = "El Dorado Vehicle Replacement")]
-        public string ElDoradoReplacementVehicles { get; set; }
+        public int ElDoradoReplacementVehicles { get; set; }
 
         [Display(Name = "El Dorado Vehicle Replacement")]
         public string ElDoradoReplacementManufacturingDate { get; set; }
@@ -134,7 +133,7 @@ namespace ClipperPortal.Models
         public string ElDoradoReplacementDeliveryDate { get; set; }
 
         [Display(Name = "El Dorado Fleet Expansion")]
-        public string ElDoradoExpansionVehicles { get; set; }
+        public int ElDoradoExpansionVehicles { get; set; }
 
         [Display(Name = "El Dorado Fleet Expansion")]
         public string ElDoradoExpansionManufacturingDate { get; set; }
@@ -146,14 +145,14 @@ namespace ClipperPortal.Models
         #region Other
         [Display(Name = "Other")]
         [RequiredIf("IsOtherNewVehiclesAndModelRequired", true, ErrorMessage = "field is required")]
-        public string OtherNewVehicles { get; set; }
+        public int OtherNewVehicles { get; set; }
 
         [Display(Name = "Other")]
         [RequiredIf("IsOtherNewVehiclesAndModelRequired", true, ErrorMessage = "field is required")]
         public string OtherNewModel { get; set; }
 
         [Display(Name = "Other - Vehicle Replacement")]
-        public string OtherReplacementVehicles { get; set; }
+        public int OtherReplacementVehicles { get; set; }
 
         [Display(Name = "Other - Vehicle Replacement")]
         public string OtherReplacementManufacturingDate { get; set; }
@@ -162,7 +161,7 @@ namespace ClipperPortal.Models
         public string OtherReplacementDeliveryDate { get; set; }
 
         [Display(Name = "Other - Fleet Expansion")]
-        public string OtherExpansionVehicles { get; set; }
+        public int OtherExpansionVehicles { get; set; }
 
         [Display(Name = "Other - Fleet Expansion")]
         public string OtherExpansionManufacturingDate { get; set; }
@@ -198,6 +197,8 @@ namespace ClipperPortal.Models
         [Display(Name = "Record Status")]
         [Required(ErrorMessage = "field is required")]
         public string RecordStatus { get; set; }
+
+        public string Notes { get; set; }
 
         [NotMapped]
         public bool IsGilligNewVehiclesAndModelRequired

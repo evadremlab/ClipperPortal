@@ -20,24 +20,24 @@
     <div class="form-group">
         @if (Model.ID == 0)
         {
-            @Html.LabelFor(model => model.Agency, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Operator, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.DropDownListFor(model => model.Agency, lookupData.Agencies, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Agency, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Operator, lookupData.Operators, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Operator, "", new { @class = "text-danger" })
             </div>
         }
         else
         {
-            @Html.HiddenFor(model => model.Agency)
-            @Html.LabelFor(model => model.Agency, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.HiddenFor(model => model.Operator)
+            @Html.LabelFor(model => model.Operator, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4 display-only">
-                @Html.DisplayFor(model => model.Agency)
+                @Html.DisplayFor(model => model.Operator)
             </div>
         }
-        @Html.LabelFor(model => model.CalendarYear, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.ReportingPeriod, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-4">
-            @Html.DropDownListFor(model => model.CalendarYear, lookupData.CalendarYears, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.CalendarYear, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.ReportingPeriod, lookupData.ReportingPeriods, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ReportingPeriod, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -368,10 +368,10 @@
         </div>
 
         <div class="form-group newflyer @(Model.HasNewFlyer ? "" : HIDDEN)">
-            @Html.LabelFor(model => model.NewFlyerReplacementDeliveryDate, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.LabelFor(model => model.NewFlyerExpansionDeliveryDate, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.EditorFor(model => model.NewFlyerReplacementDeliveryDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
-                @Html.ValidationMessageFor(model => model.NewFlyerReplacementDeliveryDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.NewFlyerExpansionDeliveryDate, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+                @Html.ValidationMessageFor(model => model.NewFlyerExpansionDeliveryDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -429,7 +429,16 @@
         </div>
     </fieldset>
 
-    <div class="form-group">
+    <fieldset>
+        <legend>Notes</legend>
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control full-width-important" } })
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group" style="margin-top:1rem;">
         <div class="col-md-12">
             <input type="submit" value="Save" class="btn btn-primary" />
             @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })

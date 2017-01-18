@@ -3,89 +3,91 @@
 DROP TABLE IF EXISTS `devicesurvey`;
 CREATE TABLE `devicesurvey` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `CalendarYear` text NOT NULL,
-  `Agency` text NOT NULL,
+  `Operator` text NOT NULL,
+  `ReportingPeriod` text NOT NULL,
   `UserName` text,
   `Email` text,
+  `IsExpectingNewVehicles` bit(1) NOT NULL DEFAULT 0, -- Are you anticipating delivery of new vehicles in in this calendar year?
   `HasGillig` bit(1) NOT NULL DEFAULT 0,
   `HasNewFlyer` bit(1) NOT NULL DEFAULT 0,
   `HasElDorado` bit(1) NOT NULL DEFAULT 0,
   `HasOther` bit(1) NOT NULL DEFAULT 0,
   `OtherName` text,
   -- Gillig
-  `GilligNewVehicles` text,
+  `GilligNewVehicles` int(11) NOT NULL DEFAULT 0,
   `GilligNewModel` text,
-  `GilligReplacementVehicles` text,
+  `GilligReplacementVehicles` int(11) NOT NULL DEFAULT 0,
   `GilligReplacementManufacturingDate` text,
   `GilligReplacementDeliveryDate` text,
-  `GilligExpansionVehicles` text,
+  `GilligExpansionVehicles` int(11) NOT NULL DEFAULT 0,
   `GilligExpansionManufacturingDate` text,
   `GilligExpansionDeliveryDate` text,
   -- New Flyer
-  `NewFlyerNewVehicles` text,
+  `NewFlyerNewVehicles` int(11) NOT NULL DEFAULT 0,
   `NewFlyerNewModel` text,
-  `NewFlyerReplacementVehicles` text,
+  `NewFlyerReplacementVehicles` int(11) NOT NULL DEFAULT 0,
   `NewFlyerReplacementManufacturingDate` text,
   `NewFlyerReplacementDeliveryDate` text,
-  `NewFlyerExpansionVehicles` text,
+  `NewFlyerExpansionVehicles` int(11) NOT NULL DEFAULT 0,
   `NewFlyerExpansionManufacturingDate` text,
   `NewFlyerExpansionDeliveryDate` text,
   -- El Dorado
-  `ElDoradoNewVehicles` text,
+  `ElDoradoNewVehicles` int(11) NOT NULL DEFAULT 0,
   `ElDoradoNewModel` text,
-  `ElDoradoReplacementVehicles` text,
+  `ElDoradoReplacementVehicles` int(11) NOT NULL DEFAULT 0,
   `ElDoradoReplacementManufacturingDate` text,
   `ElDoradoReplacementDeliveryDate` text,
-  `ElDoradoExpansionVehicles` text,
+  `ElDoradoExpansionVehicles` int(11) NOT NULL DEFAULT 0,
   `ElDoradoExpansionManufacturingDate` text,
   `ElDoradoExpansionDeliveryDate` text,
   -- Other
-  `OtherNewVehicles` text,
+  `OtherNewVehicles` int(11) NOT NULL DEFAULT 0,
   `OtherNewModel` text,
-  `OtherReplacementVehicles` text,
+  `OtherReplacementVehicles` int(11) NOT NULL DEFAULT 0,
   `OtherReplacementManufacturingDate` text,
   `OtherReplacementDeliveryDate` text,
-  `OtherExpansionVehicles` text,
+  `OtherExpansionVehicles` int(11) NOT NULL DEFAULT 0,
   `OtherExpansionManufacturingDate` text,
   `OtherExpansionDeliveryDate` text,
-  `IsExpectingNewVehicles` bit(1) NOT NULL DEFAULT 0, -- Are you anticipating delivery of new vehicles in in this calendar year?
   `ExistingVehicleDetails` text, -- If yes, (and assuming the internal layout of the 2016 vehicle is similar to previous versions), will you be seeking to install Clipper® equipment in the same/similar location on the new vehicles?
   `ReplacementVehicleDetails` text, -- No, specify the model and equipment placement details
   `PreWireRequirements` text,
   `IncludedCosts` text,
   `RecordStatus` text NOT NULL,
+  `Notes` text,
   `DateCreated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `LastUpdated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `agencies`;
-CREATE TABLE `agencies` (
+DROP TABLE IF EXISTS `operators`;
+CREATE TABLE `operators` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` text,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
-TRUNCATE TABLE agencies;
-INSERT INTO agencies (ID, Name) VALUES ('1', 'AC Transit');
-INSERT INTO agencies (ID, Name) VALUES ('2', 'County Connection');
-INSERT INTO agencies (ID, Name) VALUES ('3', 'Central Contra Costa Transit Authority');
-INSERT INTO agencies (ID, Name) VALUES ('4', 'Eastern Contra Costa Transit Authority');
-INSERT INTO agencies (ID, Name) VALUES ('5', 'FAST');
-INSERT INTO agencies (ID, Name) VALUES ('6', 'GGT');
-INSERT INTO agencies (ID, Name) VALUES ('7', 'LAVTA');
-INSERT INTO agencies (ID, Name) VALUES ('8', 'Marin Transit');
-INSERT INTO agencies (ID, Name) VALUES ('9', 'NVTA');
-INSERT INTO agencies (ID, Name) VALUES ('10', 'Petaluma Transit');
-INSERT INTO agencies (ID, Name) VALUES ('11', 'SamTrams');
-INSERT INTO agencies (ID, Name) VALUES ('12', 'SFMTA');
-INSERT INTO agencies (ID, Name) VALUES ('13', 'Santa Rosa City Bus');
-INSERT INTO agencies (ID, Name) VALUES ('14', 'SolTrans');
-INSERT INTO agencies (ID, Name) VALUES ('15', 'Sonoma County Transit');
-INSERT INTO agencies (ID, Name) VALUES ('16', 'Union City Transit');
-INSERT INTO agencies (ID, Name) VALUES ('17', 'Vacaville City Coach');
-INSERT INTO agencies (ID, Name) VALUES ('18', 'VTA');
-INSERT INTO agencies (ID, Name) VALUES ('19', 'WestCAT');
+TRUNCATE TABLE operators;
+INSERT INTO operators (ID, Name) VALUES ('1', 'AC Transit');
+INSERT INTO operators (ID, Name) VALUES ('2', 'County Connection');
+INSERT INTO operators (ID, Name) VALUES ('3', 'Central Contra Costa Transit Authority');
+INSERT INTO operators (ID, Name) VALUES ('4', 'Eastern Contra Costa Transit Authority');
+INSERT INTO operators (ID, Name) VALUES ('5', 'FAST');
+INSERT INTO operators (ID, Name) VALUES ('6', 'GGT');
+INSERT INTO operators (ID, Name) VALUES ('7', 'LAVTA');
+INSERT INTO operators (ID, Name) VALUES ('8', 'Marin Transit');
+INSERT INTO operators (ID, Name) VALUES ('9', 'NVTA');
+INSERT INTO operators (ID, Name) VALUES ('10', 'Petaluma Transit');
+INSERT INTO operators (ID, Name) VALUES ('11', 'SamTrams');
+INSERT INTO operators (ID, Name) VALUES ('12', 'SFMTA');
+INSERT INTO operators (ID, Name) VALUES ('13', 'Santa Rosa City Bus');
+INSERT INTO operators (ID, Name) VALUES ('14', 'SolTrans');
+INSERT INTO operators (ID, Name) VALUES ('15', 'Sonoma County Transit');
+INSERT INTO operators (ID, Name) VALUES ('16', 'Union City Transit');
+INSERT INTO operators (ID, Name) VALUES ('17', 'Vacaville City Coach');
+INSERT INTO operators (ID, Name) VALUES ('18', 'VTA');
+INSERT INTO operators (ID, Name) VALUES ('19', 'WestCAT');
 
 DROP TABLE IF EXISTS `auditrecords`;
 CREATE TABLE `auditrecords` (
@@ -101,52 +103,100 @@ CREATE TABLE `auditrecords` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `calendaryears`;
-CREATE TABLE `calendaryears` (
+DROP TABLE IF EXISTS `reportingperiods`;
+CREATE TABLE `reportingperiods` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` text,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
-TRUNCATE TABLE calendaryears;
-INSERT INTO calendaryears (ID, Name) VALUES ('1', 'Jan - Dec 2016');
-INSERT INTO calendaryears (ID, Name) VALUES ('2', 'Jan - Dec 2017');
-INSERT INTO calendaryears (ID, Name) VALUES ('3', 'Jan - Dec 2018');
-INSERT INTO calendaryears (ID, Name) VALUES ('4', 'Jan - Dec 2019');
-INSERT INTO calendaryears (ID, Name) VALUES ('5', 'Jan - Dec 2020');
+TRUNCATE TABLE reportingperiods;
+INSERT INTO reportingperiods (ID, Name) VALUES ('1', '2016');
+INSERT INTO reportingperiods (ID, Name) VALUES ('2', '2016 Q1');
+INSERT INTO reportingperiods (ID, Name) VALUES ('3', '2016 Q2');
+INSERT INTO reportingperiods (ID, Name) VALUES ('4', '2016 Q3');
+INSERT INTO reportingperiods (ID, Name) VALUES ('5', '2016 Q4');
+INSERT INTO reportingperiods (ID, Name) VALUES ('6', '2017');
+INSERT INTO reportingperiods (ID, Name) VALUES ('7', '2017 Q1');
+INSERT INTO reportingperiods (ID, Name) VALUES ('8', '2017 Q2');
+INSERT INTO reportingperiods (ID, Name) VALUES ('9', '2017 Q3');
+INSERT INTO reportingperiods (ID, Name) VALUES ('10', '2017 Q4');
+INSERT INTO reportingperiods (ID, Name) VALUES ('11', '2018');
+INSERT INTO reportingperiods (ID, Name) VALUES ('12', '2018 Q1');
+INSERT INTO reportingperiods (ID, Name) VALUES ('13', '2018 Q2');
+INSERT INTO reportingperiods (ID, Name) VALUES ('14', '2018 Q3');
+INSERT INTO reportingperiods (ID, Name) VALUES ('15', '2018 Q4');
+INSERT INTO reportingperiods (ID, Name) VALUES ('16', '2019');
+INSERT INTO reportingperiods (ID, Name) VALUES ('17', '2019 Q1');
+INSERT INTO reportingperiods (ID, Name) VALUES ('18', '2019 Q2');
+INSERT INTO reportingperiods (ID, Name) VALUES ('19', '2019 Q3');
+INSERT INTO reportingperiods (ID, Name) VALUES ('20', '2019 Q4');
+INSERT INTO reportingperiods (ID, Name) VALUES ('21', '2020');
+INSERT INTO reportingperiods (ID, Name) VALUES ('22', '2020 Q1');
+INSERT INTO reportingperiods (ID, Name) VALUES ('23', '2020 Q2');
+INSERT INTO reportingperiods (ID, Name) VALUES ('24', '2020 Q3');
+INSERT INTO reportingperiods (ID, Name) VALUES ('25', '2020 Q4');
+
+DELIMITER ;;
+DROP VIEW IF EXISTS `v_matrix`
+;;
+CREATE VIEW `v_matrix` AS
+SELECT
+	Operator,
+	rpt.Name AS ReportingPeriod,
+	RecordStatus,
+	-- New Vehicles
+	IF(!HasGillig OR GilligNewVehicles = 0, 0, 1) +
+	IF(!HasNewFlyer OR NewFlyerNewVehicles = 0, 0, 1) +
+	IF(!HasElDorado OR ElDoradoNewVehicles = 0, 0, 1) +
+	IF(!HasOther OR OtherNewVehicles = 0, 0, 1) AS NewVehicles,
+	-- Replacement Vehicles
+	IF(!HasGillig OR GilligReplacementVehicles = 0, 0, 1) +
+	IF(!HasNewFlyer OR NewFlyerReplacementVehicles = 0, 0, 1) +
+	IF(!HasElDorado OR ElDoradoReplacementVehicles = 0, 0, 1) +
+	IF(!HasOther OR OtherReplacementVehicles = 0, 0, 1) AS ReplacementVehicles,
+	-- ExpansionVehicles
+	IF(!HasGillig OR GilligExpansionVehicles = 0, 0, 1) +
+	IF(!HasNewFlyer OR NewFlyerExpansionVehicles = 0, 0, 1) +
+	IF(!HasElDorado OR ElDoradoExpansionVehicles = 0, 0, 1) +
+	IF(!HasOther OR OtherExpansionVehicles = 0, 0, 1) AS ExpansionVehicles
+FROM reportingperiods rpt
+LEFT OUTER JOIN devicesurvey d ON d.ReportingPeriod = rpt.Name
+;;
+
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS `getdevicesurveylist`
+;;
+CREATE PROCEDURE `getdevicesurveylist`()
+BEGIN
+	SELECT ID, Operator, ReportingPeriod, RecordStatus,
+	SUM(GilligReplacementVehicles + NewFlyerReplacementVehicles + ElDoradoReplacementVehicles + OtherReplacementVehicles) AS 'ReplacementVehicles',
+	SUM(GilligExpansionVehicles + NewFlyerExpansionVehicles + ElDoradoExpansionVehicles + OtherExpansionVehicles) AS 'ExpansionVehicles'
+	FROM DeviceSurvey
+	GROUP BY ID, ReportingPeriod, Operator, RecordStatus
+	ORDER BY ID, ReportingPeriod, Operator, RecordStatus;
+END
+;;
 
 DELIMITER ;;
 DROP PROCEDURE IF EXISTS `getmatrix`
 ;;
-CREATE PROCEDURE `getmatrix`()
+DROP PROCEDURE IF EXISTS `getdevicesurveymatrix`
+;;
+CREATE PROCEDURE `getdevicesurveymatrix`()
 BEGIN
-	SELECT Agency, CalendarYear, RecordStatus,
+SELECT Operator, ReportingPeriod, RecordStatus,
 		IF(SUM(NewVehicles) > 0, 'Y', '') AS NewVehicles,
 		IF(SUM(ReplacementVehicles) > 0, 'Y', '') AS ReplacementVehicles,
 		IF(SUM(ExpansionVehicles) > 0, 'Y', '') AS ExpansionVehicles
-	FROM (SELECT
-		Agency,
-		cal.Name AS CalendarYear,
-		RecordStatus,
-		-- New Vehicles
-		IF(!HasGillig OR GilligNewVehicles IS NULL, 0, 1) +
-		IF(!HasNewFlyer OR NewFlyerNewVehicles IS NULL, 0, 1) +
-		IF(!HasElDorado OR ElDoradoNewVehicles IS NULL, 0, 1) +
-		IF(!HasOther OR OtherNewVehicles IS NULL, 0, 1) AS NewVehicles,
-		-- Replacement Vehicles
-		IF(!HasGillig OR GilligReplacementVehicles IS NULL, 0, 1) +
-		IF(!HasNewFlyer OR NewFlyerReplacementVehicles IS NULL, 0, 1) +
-		IF(!HasElDorado OR ElDoradoReplacementVehicles IS NULL, 0, 1) +
-		IF(!HasOther OR OtherReplacementVehicles IS NULL, 0, 1) AS ReplacementVehicles,
-		-- ExpansionVehicles
-		IF(!HasGillig OR GilligExpansionVehicles IS NULL, 0, 1) +
-		IF(!HasNewFlyer OR NewFlyerExpansionVehicles IS NULL, 0, 1) +
-		IF(!HasElDorado OR ElDoradoExpansionVehicles IS NULL, 0, 1) +
-		IF(!HasOther OR OtherExpansionVehicles IS NULL, 0, 1) AS ExpansionVehicles
-		FROM calendaryears cal
-		LEFT OUTER JOIN devicesurvey d ON d.CalendarYear = cal.Name
-	) AA
-	GROUP BY CalendarYear, Agency, RecordStatus
-	ORDER BY CalendarYear, Agency, RecordStatus;
+	FROM v_matrix
+	GROUP BY ReportingPeriod, Operator, RecordStatus
+	ORDER BY ReportingPeriod, Operator, RecordStatus;
+	SELECT ID, Operator, ReportingPeriod, RecordStatus,
+	SUM(GilligReplacementVehicles + NewFlyerReplacementVehicles + ElDoradoReplacementVehicles + OtherReplacementVehicles) AS 'ReplacementVehicles',
+	SUM(GilligExpansionVehicles + NewFlyerExpansionVehicles + ElDoradoExpansionVehicles + OtherExpansionVehicles) AS 'ExpansionVehicles'
+	FROM DeviceSurvey
+	GROUP BY ID, ReportingPeriod, Operator, RecordStatus
+	ORDER BY ID, ReportingPeriod, Operator, RecordStatus;
 END
 ;;

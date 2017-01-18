@@ -8,19 +8,19 @@ namespace ClipperPortal.Services
 {
     public static class StaticDataProvider
     {
-        public static IEnumerable<Agency> GetAgencies()
+        public static IEnumerable<Operator> GetOperators()
         {
             using (var context = new ClipperContext())
             {
-                return context.Agencies.ToList();
+                return context.Operators.ToList();
             }
         }
 
-        public static IEnumerable<CalendarYear> GetCalendarYears()
+        public static IEnumerable<ReportingPeriod> GetReportingPeriods()
         {
             using (var context = new ClipperContext())
             {
-                return context.CalendarYears.ToList();
+                return context.ReportingPeriods.ToList();
             }
         }
     }

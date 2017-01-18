@@ -1,13 +1,13 @@
 ﻿/***
-* AgencyFilterWidget - Provides filter for Agency name column.
+* ReportingPeriodFilterWidget - Provides filter for ReportingPeriod column.
 */
 
-function AgencyFilterWidget() {
+function ReportingPeriodFilterWidget() {
     /***
     * This method must return type of registered widget type in 'SetFilterWidgetType' method
     */
     this.getAssociatedTypes = function () {
-        return ["AgencyFilterWidget"];
+        return ["ReportingPeriodFilterWidget"];
     };
     /***
     * This method invokes when filter widget was shown on the page
@@ -38,34 +38,34 @@ function AgencyFilterWidget() {
         this.value = values.length > 0 ? values[0] : { filterType: 1, filterValue: "" };
 
         this.renderWidget(); //onRender filter widget
-        this.loadAgencies(); //load data from the server
+        this.loadReportingPeriods(); //load data from the server
         this.registerEvents(); //handle events
     };
     this.renderWidget = function () {
-        var html = '<p>Select Operator to filter:</p>\
+        var html = '<p>Select Reporting Period to filter:</p>\
                     <select style="width:250px;" class="grid-filter-type list form-control"></select>';
         this.container.append(html);
     };
     /***
-    * Method loads all agencies from the server via Ajax:
+    * Method loads data from the server via Ajax:
     */
-    this.loadAgencies = function () {
+    this.loadReportingPeriods = function () {
         var $this = this;
-        var data = PageController.cachedAgencies || [];
+        var data = PageController.cachedReportingPeriods || [];
 
         if (data.length === 0) {
-            $.get("/api/Lookup/Agencies", function (data) {
-                $this.fillAgencies(data);
-                PageController.cachedAgencies = data;
+            $.get("/api/Lookup/ReportingPeriods", function (data) {
+                $this.fillReportingPeriods(data);
+                PageController.cachedReportingPeriods = data;
             });
         } else {
-            $this.fillAgencies(data);
+            $this.fillReportingPeriods(data);
         }
     };
     /***
     * Method fills select list with data.
     */
-    this.fillAgencies = function (items) {
+    this.fillReportingPeriods = function (items) {
         var list = this.container.find(".list");
         for (var i = 0; i < items.length; i++) {
             var selected = items[i].Name === PageController.filterValue ? ' selected="selected"' : '';
@@ -76,7 +76,7 @@ function AgencyFilterWidget() {
     * Internal method that register event handlers for 'apply' button.
     */
     this.registerEvents = function () {
-        //get list with agencies
+        //get list with calendar years
         var list = this.container.find(".list");
         //save current context:
         var $context = this;
@@ -87,4 +87,4 @@ function AgencyFilterWidget() {
             $context.cb(values);
         });
     };
-}   
+}

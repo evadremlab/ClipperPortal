@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ClipperPortal.Models
 {
-    [Table("calendaryears")]
-    public class CalendarYear
+    [Table("operators")]
+    public class Operator
     {
         [Key]
         public int ID { get; set; }

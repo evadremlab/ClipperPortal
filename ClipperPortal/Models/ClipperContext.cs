@@ -12,9 +12,9 @@ namespace ClipperPortal.Models
     {
         public ClipperContext() : base(nameOrConnectionString: "DefaultConnection") { }
 
-        public DbSet<Agency> Agencies { get; set; }
+        public DbSet<Operator> Operators { get; set; }
         public DbSet<AuditRecord> AuditRecords { get; set; }
-        public DbSet<CalendarYear> CalendarYears { get; set; }
+        public DbSet<ReportingPeriod> ReportingPeriods { get; set; }
         public DbSet<DeviceSurvey> DeviceSurveys { get; set; }
 
         private object GetPrimaryKeyValue(DbEntityEntry entry)

@@ -10,12 +10,12 @@ namespace ClipperPortal.Controllers
     public class LookupController : ApiController
     {
         [HttpGet]
-        [Route("api/Lookup/Agencies")]
-        public IEnumerable<Agency> Agencies()
+        [Route("api/Lookup/Operators")]
+        public IEnumerable<Operator> Operators()
         {
-            var data = new List<Agency> { new Agency { Name = "-- select --" } };
+            var data = new List<Operator> { new Operator { Name = "-- select --" } };
 
-            foreach (var item in StaticDataProvider.GetAgencies())
+            foreach (var item in StaticDataProvider.GetOperators())
             {
                 data.Add(item);
             }
@@ -24,12 +24,12 @@ namespace ClipperPortal.Controllers
         }
 
         [HttpGet]
-        [Route("api/Lookup/CalendarYears")]
-        public IEnumerable<CalendarYear> CalendarYears()
+        [Route("api/Lookup/ReportingPeriods")]
+        public IEnumerable<ReportingPeriod> ReportingPeriods()
         {
-            var data = new List<CalendarYear> { new CalendarYear { Name = "-- select --" } };
+            var data = new List<ReportingPeriod> { new ReportingPeriod { Name = "-- select --" } };
 
-            foreach (var item in StaticDataProvider.GetCalendarYears())
+            foreach (var item in StaticDataProvider.GetReportingPeriods())
             {
                 data.Add(item);
             }

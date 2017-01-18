@@ -15,24 +15,27 @@ namespace ClipperPortal.Controllers
 {
     public class DeviceSurveyController : Controller
     {
-        // GET: DeviceSurveyTest
+        // GET: DeviceSurvey
         public ActionResult Index()
         {
-            return View(DeviceSurveyProvider.GetAll());
+            var model = DeviceSurveyProvider.GetList();
+
+            return View(model);
         }
 
-        // GET: DeviceSurveyTest/Create
+        // GET: DeviceSurvey/Create
         public ActionResult Create()
         {
             return View(new DeviceSurvey());
         }
 
-        // POST: DeviceSurveyTest/Create
+        // POST: DeviceSurvey/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CalendarYear,Agency,UserName,Email,IsExpectingNewVehicles,HasGillig,HasNewFlyer,HasElDorado,HasOther,OtherName,GilligNewVehicles,GilligNewModel,GilligReplacementVehicles,GilligReplacementManufacturingDate,GilligReplacementDeliveryDate,GilligExpansionVehicles,GilligExpansionManufacturingDate,GilligExpansionDeliveryDate,NewFlyerNewVehicles,NewFlyerNewModel,NewFlyerReplacementVehicles,NewFlyerReplacementManufacturingDate,NewFlyerReplacementDeliveryDate,NewFlyerExpansionVehicles,NewFlyerExpansionManufacturingDate,NewFlyerExpansionDeliveryDate,ElDoradoNewVehicles,ElDoradoNewModel,ElDoradoReplacementVehicles,ElDoradoReplacementManufacturingDate,ElDoradoReplacementDeliveryDate,ElDoradoExpansionVehicles,ElDoradoExpansionManufacturingDate,ElDoradoExpansionDeliveryDate,OtherNewVehicles,OtherNewModel,OtherReplacementVehicles,OtherReplacementManufacturingDate,OtherReplacementDeliveryDate,OtherExpansionVehicles,OtherExpansionManufacturingDate,OtherExpansionDeliveryDate,OwnExistingVehicles,ExistingVehicleDetails,ReplacementVehicleDetails,PreWireRequirements,IncludedCosts,LastUpdated,RecordStatus")] DeviceSurvey deviceSurvey)
+        //public ActionResult Create([Bind(Include = "ID,ReportingPeriod,Operator,UserName,Email,IsExpectingNewVehicles,HasGillig,HasNewFlyer,HasElDorado,HasOther,OtherName,GilligNewVehicles,GilligNewModel,GilligReplacementVehicles,GilligReplacementManufacturingDate,GilligReplacementDeliveryDate,GilligExpansionVehicles,GilligExpansionManufacturingDate,GilligExpansionDeliveryDate,NewFlyerNewVehicles,NewFlyerNewModel,NewFlyerReplacementVehicles,NewFlyerReplacementManufacturingDate,NewFlyerReplacementDeliveryDate,NewFlyerExpansionVehicles,NewFlyerExpansionManufacturingDate,NewFlyerExpansionDeliveryDate,ElDoradoNewVehicles,ElDoradoNewModel,ElDoradoReplacementVehicles,ElDoradoReplacementManufacturingDate,ElDoradoReplacementDeliveryDate,ElDoradoExpansionVehicles,ElDoradoExpansionManufacturingDate,ElDoradoExpansionDeliveryDate,OtherNewVehicles,OtherNewModel,OtherReplacementVehicles,OtherReplacementManufacturingDate,OtherReplacementDeliveryDate,OtherExpansionVehicles,OtherExpansionManufacturingDate,OtherExpansionDeliveryDate,OwnExistingVehicles,ExistingVehicleDetails,ReplacementVehicleDetails,PreWireRequirements,IncludedCosts,LastUpdated,RecordStatus,Notes")] DeviceSurvey deviceSurvey)
+        public ActionResult Create(DeviceSurvey deviceSurvey)
         {
             if (ModelState.IsValid)
             {
@@ -44,7 +47,7 @@ namespace ClipperPortal.Controllers
             return View(deviceSurvey);
         }
 
-        // GET: DeviceSurveyTest/Edit/5
+        // GET: DeviceSurvey/Edit/5
         public ActionResult Edit(int? id)
         {
             if (!id.HasValue)
@@ -62,10 +65,11 @@ namespace ClipperPortal.Controllers
             return View(deviceSurvey);
         }
 
-        // POST: DeviceSurveyTest/Edit/5
+        // POST: DeviceSurvey/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CalendarYear,Agency,UserName,Email,IsExpectingNewVehicles,HasGillig,HasNewFlyer,HasElDorado,HasOther,OtherName,GilligNewVehicles,GilligNewModel,GilligReplacementVehicles,GilligReplacementManufacturingDate,GilligReplacementDeliveryDate,GilligExpansionVehicles,GilligExpansionManufacturingDate,GilligExpansionDeliveryDate,NewFlyerNewVehicles,NewFlyerNewModel,NewFlyerReplacementVehicles,NewFlyerReplacementManufacturingDate,NewFlyerReplacementDeliveryDate,NewFlyerExpansionVehicles,NewFlyerExpansionManufacturingDate,NewFlyerExpansionDeliveryDate,ElDoradoNewVehicles,ElDoradoNewModel,ElDoradoReplacementVehicles,ElDoradoReplacementManufacturingDate,ElDoradoReplacementDeliveryDate,ElDoradoExpansionVehicles,ElDoradoExpansionManufacturingDate,ElDoradoExpansionDeliveryDate,OtherNewVehicles,OtherNewModel,OtherReplacementVehicles,OtherReplacementManufacturingDate,OtherReplacementDeliveryDate,OtherExpansionVehicles,OtherExpansionManufacturingDate,OtherExpansionDeliveryDate,OwnExistingVehicles,ExistingVehicleDetails,ReplacementVehicleDetails,PreWireRequirements,IncludedCosts,LastUpdated,RecordStatus")] DeviceSurvey deviceSurvey)
+        //public ActionResult Edit([Bind(Include = "ID,ReportingPeriod,Operator,UserName,Email,IsExpectingNewVehicles,HasGillig,HasNewFlyer,HasElDorado,HasOther,OtherName,GilligNewVehicles,GilligNewModel,GilligReplacementVehicles,GilligReplacementManufacturingDate,GilligReplacementDeliveryDate,GilligExpansionVehicles,GilligExpansionManufacturingDate,GilligExpansionDeliveryDate,NewFlyerNewVehicles,NewFlyerNewModel,NewFlyerReplacementVehicles,NewFlyerReplacementManufacturingDate,NewFlyerReplacementDeliveryDate,NewFlyerExpansionVehicles,NewFlyerExpansionManufacturingDate,NewFlyerExpansionDeliveryDate,ElDoradoNewVehicles,ElDoradoNewModel,ElDoradoReplacementVehicles,ElDoradoReplacementManufacturingDate,ElDoradoReplacementDeliveryDate,ElDoradoExpansionVehicles,ElDoradoExpansionManufacturingDate,ElDoradoExpansionDeliveryDate,OtherNewVehicles,OtherNewModel,OtherReplacementVehicles,OtherReplacementManufacturingDate,OtherReplacementDeliveryDate,OtherExpansionVehicles,OtherExpansionManufacturingDate,OtherExpansionDeliveryDate,OwnExistingVehicles,ExistingVehicleDetails,ReplacementVehicleDetails,PreWireRequirements,IncludedCosts,LastUpdated,RecordStatus,Notes")] DeviceSurvey deviceSurvey)
+        public ActionResult Edit(DeviceSurvey deviceSurvey)
         {
             if (ModelState.IsValid)
             {
@@ -80,8 +84,9 @@ namespace ClipperPortal.Controllers
         // GET DeviceSurvey/Export
         public FileContentResult Export()
         {
-            string displayName;
             var csvExport = new CSVExporter();
+            var excludedFields = "ID,HasGilligYN,HasNewFlyerYN,HasElDoradoYN,HasOtherYN,IsGilligNewVehiclesAndModelRequired,IsNewFlyerNewVehiclesAndModelRequired,IsElDoradoNewVehiclesAndModelRequired,IsOtherNewVehiclesAndModelRequired";
+            var excluded = excludedFields.Split(',').ToList<String>();
 
             foreach (var deviceSurvey in DeviceSurveyProvider.GetAll())
             {
@@ -89,43 +94,10 @@ namespace ClipperPortal.Controllers
 
                 foreach (var prop in deviceSurvey.GetType().GetProperties())
                 {
-                    if (prop.Name == "ID") continue;
-
-                    switch (prop.Name)
+                    if (excluded.Find(x => x == prop.Name) == null)
                     {
-                        case "Agency":
-                            displayName = "Operator";
-                            break;
-                        case "CalendarYear":
-                            displayName = "Calendar Year";
-                            break;
-                        case "HasGilligYN":
-                            displayName = "Gillig";
-                            break;
-                        case "HasNewFlyerYN":
-                            displayName = "NewFlyer";
-                            break;
-                        case "HasElDoradoYN":
-                            displayName = "ElDorado";
-                            break;
-                        case "OtherName":
-                            displayName = "Other";
-                            break;
-                        case "RecordStatus":
-                            displayName = "Record Status";
-                            break;
-                        case "DateCreated":
-                            displayName = "Date Created";
-                            break;
-                        case "LastUpdated":
-                            displayName = "Last Updated";
-                            break;
-                        default:
-                            displayName = prop.Name;
-                            break;
+                        csvExport[prop.Name] = prop.GetValue(deviceSurvey, null);
                     }
-
-                    csvExport[displayName] = prop.GetValue(deviceSurvey, null);
                 }
             }
 

@@ -113,6 +113,13 @@ table .buttons {
 }
 
 /* Bootstrap overrides */
+.navbar-inverse .navbar-brand {
+    color: #ddd;
+    cursor: default;
+}
+.navbar-inverse .navbar-brand:hover {
+    color: #ddd;
+}
 
 .table-striped > tbody > tr:nth-child(odd) > td, 
 .table-striped > tbody > tr:nth-child(odd) > th {
@@ -170,7 +177,9 @@ fieldset legend {
 .display-only {
     padding-top: 0.7rem;
 }
-
+.modal-dialog {
+    margin: 200px auto !important;
+}
 @media print {
   a[href]:after {
     content: none !important;

@@ -2,7 +2,7 @@
 @model IEnumerable<ClipperPortal.Models.ReportMatrix>
 
 @{
-    ViewBag.Title = "Reports - Matrix";
+    ViewBag.Title = "Device Surveys";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var filter = string.Empty;
@@ -22,12 +22,12 @@
     @Html.ActionLink("Export to CSV", "Export", null, new { @class = "btn btn-info pull-right btn-export" })
 </p>
 
+
 @Html.Grid(Model).Named("reportMatrixGrid").Columns(columns =>
 {
-    columns.Add(x => x.Agency).Titled("Operator").Sortable(true).Filterable(true).SetFilterWidgetType("AgencyFilterWidget");
-    columns.Add(x => x.CalendarYear).Titled("Calendar Year").Sortable(true).Filterable(true).SetFilterWidgetType("CalendarYearFilterWidget");
+    columns.Add(x => x.Operator).Titled("Operator").Sortable(true).Filterable(true).SetFilterWidgetType("OperatorFilterWidget");
+    columns.Add(x => x.ReportingPeriod).Titled("Reporting Period").Sortable(true).Filterable(true).SetFilterWidgetType("ReportingPeriodFilterWidget");
     columns.Add(x => x.RecordStatus).Titled("Record Status").Sortable(true).Filterable(true).SetFilterWidgetType("RecordStatusFilterWidget");
-    columns.Add(x => x.NewVehicles).Titled("New Vehicles").SetWidth("4rem");
     columns.Add(x => x.ReplacementVehicles).Titled("Replacement Vehicles").SetWidth("4rem");
     columns.Add(x => x.ExpansionVehicles).Titled("Expansion Vehicles").SetWidth("4rem");
 }).WithPaging(15)
@@ -35,14 +35,15 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
+            PageController.bind();
             PageController.filterValue = '@filter';
-            pageGrids.reportMatrixGrid.addFilterWidget(new AgencyFilterWidget());
-            pageGrids.reportMatrixGrid.addFilterWidget(new CalendarYearFilterWidget());
+            pageGrids.reportMatrixGrid.addFilterWidget(new OperatorFilterWidget());
+            pageGrids.reportMatrixGrid.addFilterWidget(new ReportingPeriodFilterWidget());
             pageGrids.reportMatrixGrid.addFilterWidget(new RecordStatusFilterWidget());
 
             $('.btn-export').click(function (evt) {
                 evt.preventDefault();
-                window.open('/Reports/ExportMatrix');
+                window.open('/DeviceSurvey/Export');
             });
         });
     </script>

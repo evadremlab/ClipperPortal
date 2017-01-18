@@ -8,8 +8,8 @@ namespace ClipperPortal.Services
 {
     public class LookupData
     {
-        public SelectList Agencies { get; set; }
-        public SelectList CalendarYears { get; set; }
+        public SelectList Operators { get; set; }
+        public SelectList ReportingPeriods { get; set; }
         public SelectList RecordStatus { get; set; }
     }
 
@@ -17,8 +17,8 @@ namespace ClipperPortal.Services
     {
         public static LookupData GetLookupData()
         {
-            var agencies = StaticDataProvider.GetAgencies();
-            var calendarYears = StaticDataProvider.GetCalendarYears();
+            var operators = StaticDataProvider.GetOperators();
+            var reportingPeriods = StaticDataProvider.GetReportingPeriods();
 
             var recordStatus = new Dictionary<string, string>();
             recordStatus.Add("Planned", "Planned");
@@ -26,8 +26,8 @@ namespace ClipperPortal.Services
 
             return new LookupData
             {
-                Agencies = new SelectList(agencies, "Name", "Name"),
-                CalendarYears = new SelectList(calendarYears, "Name", "Name"),
+                Operators = new SelectList(operators, "Name", "Name"),
+                ReportingPeriods = new SelectList(reportingPeriods, "Name", "Name"),
                 RecordStatus = new SelectList(recordStatus, "Key", "Value")
             };
         }

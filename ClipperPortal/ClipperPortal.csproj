@@ -169,9 +169,10 @@
     <Compile Include="Models\ClipperContext.cs" />
     <Compile Include="Models\DeviceSurvey.cs" />
     <Compile Include="Models\AuditRecord.cs" />
-    <Compile Include="Models\CalendarYear.cs" />
-    <Compile Include="Models\Agency.cs" />
+    <Compile Include="Models\ReportingPeriod.cs" />
+    <Compile Include="Models\Operator.cs" />
     <Compile Include="Models\APIResponse.cs" />
+    <Compile Include="Models\DeviceSurveyListItem.cs" />
     <Compile Include="Models\ReportMatrix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CSVExporter.cs" />
@@ -201,7 +202,6 @@
     <Content Include="Database\runAfterImport.txt" />
     <Content Include="Database\scripts.txt" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\orderedList1.png" />
@@ -210,13 +210,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Widgets\record-status-filter-widget.js" />
-    <Content Include="Scripts\Widgets\calendar-year-filter-widget.js" />
+    <Content Include="Scripts\Widgets\reporting-period-filter-widget.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
@@ -302,7 +298,7 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\Widgets\agency-filter-widget.js" />
+    <Content Include="Scripts\Widgets\operator-filter-widget.js" />
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.ru.js" />
     <Content Include="Scripts\gridmvc.min.js" />
@@ -340,7 +336,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Reports\Audit.cshtml" />
-    <Content Include="Views\Reports\Matrix.cshtml" />
     <Content Include="Views\Shared\_StatusMessage.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
@@ -350,6 +345,7 @@
     <Content Include="Views\DeviceSurvey\Edit.cshtml" />
     <Content Include="Views\DeviceSurvey\Index.cshtml" />
     <Content Include="Views\DeviceSurvey\_Content.cshtml" />
+    <Content Include="Views\Reports\Matrix.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

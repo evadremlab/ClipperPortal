@@ -1,13 +1,13 @@
 ﻿/***
-* CalendarYearFilterWidget - Provides filter for Calendar Years column.
+* OperatorFilterWidget - Provides filter for Transit Operator name column.
 */
 
-function CalendarYearFilterWidget() {
+function OperatorFilterWidget() {
     /***
     * This method must return type of registered widget type in 'SetFilterWidgetType' method
     */
     this.getAssociatedTypes = function () {
-        return ["CalendarYearFilterWidget"];
+        return ["OperatorFilterWidget"];
     };
     /***
     * This method invokes when filter widget was shown on the page
@@ -38,34 +38,34 @@ function CalendarYearFilterWidget() {
         this.value = values.length > 0 ? values[0] : { filterType: 1, filterValue: "" };
 
         this.renderWidget(); //onRender filter widget
-        this.loadCalendarYears(); //load data from the server
+        this.loadOperators(); //load data from the server
         this.registerEvents(); //handle events
     };
     this.renderWidget = function () {
-        var html = '<p>Select Calendar Year to filter:</p>\
+        var html = '<p>Select Operator to filter:</p>\
                     <select style="width:250px;" class="grid-filter-type list form-control"></select>';
         this.container.append(html);
     };
     /***
-    * Method loads data from the server via Ajax:
+    * Method loads all operators from the server via Ajax:
     */
-    this.loadCalendarYears = function () {
+    this.loadOperators = function () {
         var $this = this;
-        var data = PageController.cachedCalendarYears || [];
+        var data = PageController.cachedOperators || [];
 
         if (data.length === 0) {
-            $.get("/api/Lookup/CalendarYears", function (data) {
-                $this.fillCalendarYears(data);
-                PageController.cachedCalendarYears = data;
+            $.get("/api/Lookup/Operators", function (data) {
+                $this.fillOperators(data);
+                PageController.cachedOperators = data;
             });
         } else {
-            $this.fillCalendarYears(data);
+            $this.fillOperators(data);
         }
     };
     /***
     * Method fills select list with data.
     */
-    this.fillCalendarYears = function (items) {
+    this.fillOperators = function (items) {
         var list = this.container.find(".list");
         for (var i = 0; i < items.length; i++) {
             var selected = items[i].Name === PageController.filterValue ? ' selected="selected"' : '';
@@ -76,7 +76,7 @@ function CalendarYearFilterWidget() {
     * Internal method that register event handlers for 'apply' button.
     */
     this.registerEvents = function () {
-        //get list with calendar years
+        //get list with operators
         var list = this.container.find(".list");
         //save current context:
         var $context = this;
@@ -87,4 +87,4 @@ function CalendarYearFilterWidget() {
             $context.cb(values);
         });
     };
-}
+}   

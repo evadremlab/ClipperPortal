@@ -120,10 +120,7 @@ var PageController = (function () {
         showStatusMessage(msg).addClass('error-message');
     }
 
-    function ajaxDelete(recordType) {
-        var $el = $(this);
-        var $row = $el.closest('tr');
-        var id = $row.find('td.primary-key').text();
+    function ajaxDelete(recordType, id) {
         var url = '/api/{0}API/{1}'.format(recordType, id);
         $.ajax({
             type: 'DELETE',
@@ -150,9 +147,12 @@ var PageController = (function () {
                 });
             } else if (isPage('.list-page')) {
                 $('.btn-delete').on('click', function () {
-                    if (confirm('Delete this DeviceSurvey?')) {
-                        ajaxDelete.call(this, 'DeviceSurvey');
-                    }
+                    var id = $(this).closest('tr').find('td.primary-key').text();
+                    $('#confirm-delete .modal-header').text('Delete this DeviceSurvey?');
+                    $('#confirm-delete').modal('show').find('.btn-ok').on('click', function (evt) {
+                        $('#confirm-delete').modal('hide');
+                        ajaxDelete('DeviceSurvey', id);
+                    });
                 });
             }
         }

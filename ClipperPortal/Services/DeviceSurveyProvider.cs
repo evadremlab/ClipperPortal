@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
+
+using MySql.Data.MySqlClient;
 
 using ClipperPortal.Models;
 
@@ -9,11 +13,13 @@ namespace ClipperPortal.Services
 {
     public static class DeviceSurveyProvider
     {
+        static string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
         public static IEnumerable<DeviceSurvey> GetAll()
         {
             using (var context = new ClipperContext())
             {
-                return context.DeviceSurveys.OrderBy(x => x.CalendarYear).ThenBy(x => x.Agency).ThenBy(x => x.RecordStatus).ToList();
+                return context.DeviceSurveys.OrderBy(x => x.ReportingPeriod).ThenBy(x => x.Operator).ThenBy(x => x.RecordStatus).ToList();
             }
         }
 
@@ -84,6 +90,37 @@ namespace ClipperPortal.Services
                     context.SaveChanges();
                 }
             }
+        }
+
+        public static IEnumerable<DeviceSurveyListItem> GetList()
+        {
+            var list = new List<DeviceSurveyListItem>();
+
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "getdevicesurveylist";
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var data = new DeviceSurveyListItem();
+
+                            data.Populate(reader);
+
+                            list.Add(data);
+                        }
+                    }
+
+                }
+            };
+
+            return list;
         }
     }
 }

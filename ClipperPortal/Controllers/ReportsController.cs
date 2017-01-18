@@ -84,11 +84,8 @@ namespace ClipperPortal.Controllers
                 {
                     switch (prop.Name)
                     {
-                        case "CalendarYear":
-                            displayName = "Calendar Year";
-                            break;
-                        case "Agency":
-                            displayName = "Operator";
+                        case "Reporting Period":
+                            displayName = "Reporting Period";
                             break;
                         case "RecordStatus":
                             displayName = "Record Status";

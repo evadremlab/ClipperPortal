@@ -27,8 +27,8 @@ namespace ClipperPortal
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                       "~/Scripts/respond.min.js",
-                      "~/Scripts/Widgets/agency-filter-widget.js",
-                      "~/Scripts/Widgets/calendar-year-filter-widget.js",
+                      "~/Scripts/Widgets/operator-filter-widget.js",
+                      "~/Scripts/Widgets/reporting-period-filter-widget.js",
                       "~/Scripts/Widgets/record-status-filter-widget.js",
                       "~/Scripts/gridmvc.min.js",
                       "~/Scripts/Site.js"));

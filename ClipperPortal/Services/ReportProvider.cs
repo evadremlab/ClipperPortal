@@ -21,7 +21,7 @@ namespace ClipperPortal.Services
             {
                 using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = "getmatrix";
+                    command.CommandText = "getdevicesurveymatrix";
                     command.CommandType = CommandType.StoredProcedure;
 
                     connection.Open();
@@ -34,8 +34,8 @@ namespace ClipperPortal.Services
 
                             data.Populate(reader);
 
-                            // exclude any CalendarYears without data
-                            if (!string.IsNullOrEmpty(data.Agency))
+                            // exclude any ReportingPeriod without data
+                            if (!string.IsNullOrEmpty(data.Operator))
                             {
                                 list.Add(data);
                             }
