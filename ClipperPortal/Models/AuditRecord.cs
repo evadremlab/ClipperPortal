@@ -33,5 +33,8 @@ namespace ClipperPortal.Models
 
         [Display(Name = "Changed By")]
         public string UserName { get; set; }
+
+        [Display(Name = "Operator")]
+        public string Operator { get; set; }
     }
 }

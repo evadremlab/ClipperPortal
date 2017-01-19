@@ -100,6 +100,7 @@ CREATE TABLE `auditrecords` (
   `OldValue` text,
   `NewValue` text,
   `UserName` text,
+  `Operator` text,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 

@@ -38,32 +38,52 @@ namespace ClipperPortal.Services
             using (var context = new ClipperContext())
             {
                 context.DeviceSurveys.Add(deviceSurvey);
+                context.Operator = deviceSurvey.Operator;
+                context.UserName = deviceSurvey.UserName;
                 context.SaveChanges(); // so we get the primary key of the created record
 
-                foreach (var prop in deviceSurvey.GetType().GetProperties())
+                // IF CREATING ONE AUDITRECORD FOR A NEW RECORD
+                var auditRecord = new AuditRecord()
                 {
-                    if (prop.Name == "DateCreated" || prop.Name == "LastUpdated")
-                    {
-                        continue;
-                    }
+                    EntityName = "DeviceSurvey",
+                    PrimaryKeyValue = deviceSurvey.ID.ToString(),
+                    Action = "Created",
+                    PropertyName = string.Empty,
+                    OldValue = null,
+                    NewValue = null,
+                    DateChanged = now,
+                    UserName = deviceSurvey.UserName,
+                    Operator = deviceSurvey.Operator
+                };
 
-                    var currentValue = prop.GetValue(deviceSurvey, null);
-                    var currentStringValue = currentValue == null ? "" : currentValue.ToString();
+                context.AuditRecords.Add(auditRecord);
 
-                    var auditRecord = new AuditRecord()
-                    {
-                        EntityName = "DeviceSurvey",
-                        PrimaryKeyValue = deviceSurvey.ID.ToString(),
-                        Action = "Created",
-                        PropertyName = prop.Name,
-                        OldValue = null,
-                        NewValue = currentStringValue,
-                        DateChanged = now,
-                        UserName = string.Empty
-                    };
+                // IF CREATING AUDITRECORD FOR EACH FIELD OF A NEW RECORD
+                //foreach (var prop in deviceSurvey.GetType().GetProperties())
+                //{
+                //    if (prop.Name == "DateCreated" || prop.Name == "LastUpdated")
+                //    {
+                //        continue;
+                //    }
 
-                    context.AuditRecords.Add(auditRecord);
-                }
+                //    var currentValue = prop.GetValue(deviceSurvey, null);
+                //    var currentStringValue = currentValue == null ? "" : currentValue.ToString();
+
+                //    var auditRecord = new AuditRecord()
+                //    {
+                //        EntityName = "DeviceSurvey",
+                //        PrimaryKeyValue = deviceSurvey.ID.ToString(),
+                //        Action = "Created",
+                //        PropertyName = prop.Name,
+                //        OldValue = null,
+                //        NewValue = currentStringValue,
+                //        DateChanged = now,
+                //        UserName = deviceSurvey.UserName,
+                //        Operator = deviceSurvey.Operator
+                //    };
+
+                //    context.AuditRecords.Add(auditRecord);
+                //}
 
                 context.SaveChanges();
             }
@@ -74,6 +94,8 @@ namespace ClipperPortal.Services
             using (var context = new ClipperContext())
             {
                 context.Entry(deviceSurvey).State = EntityState.Modified;
+                context.Operator = deviceSurvey.Operator;
+                context.UserName = deviceSurvey.UserName;
                 context.SaveChanges();
             }
         }
@@ -87,6 +109,8 @@ namespace ClipperPortal.Services
                 if (deviceSurvey != null)
                 {
                     context.DeviceSurveys.Remove(deviceSurvey);
+                    context.Operator = deviceSurvey.Operator;
+                    context.UserName = deviceSurvey.UserName;
                     context.SaveChanges();
                 }
             }

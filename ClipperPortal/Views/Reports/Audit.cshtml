@@ -17,13 +17,15 @@
 
 @Html.Grid(Model).Columns(columns =>
 {
+    columns.Add(x => x.Operator).Titled("Operator").Sortable(true);
     columns.Add(x => x.EntityName).Titled("Entity").Sortable(true).ThenSortBy(x => x.PrimaryKeyValue);
-    columns.Add(x => x.PrimaryKeyValue).Titled("ID");
+    columns.Add(x => x.PrimaryKeyValue).Titled("ID").Sortable(true);
     columns.Add(x => x.Action).Titled("Action").Sortable(true);
     columns.Add(x => x.PropertyName).Titled("Property").Sortable(true);
     columns.Add(x => x.OldValue).Titled("Old Value").Sortable(true);
     columns.Add(x => x.NewValue).Titled("New Value").Sortable(true);
-    columns.Add(x => x.DateChanged).Titled("Date Changed").Sortable(true);
+    columns.Add(x => x.DateChanged).Titled("Date Changed").SetWidth("4rem").Sortable(true);
+    columns.Add(x => x.UserName).Titled("Changed By").Sortable(true);
 }).WithPaging(10)
 
 @section Scripts {

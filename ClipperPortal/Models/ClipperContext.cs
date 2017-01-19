@@ -17,6 +17,9 @@ namespace ClipperPortal.Models
         public DbSet<ReportingPeriod> ReportingPeriods { get; set; }
         public DbSet<DeviceSurvey> DeviceSurveys { get; set; }
 
+        public string Operator { get; set; }
+        public string UserName { get; set; }
+
         private object GetPrimaryKeyValue(DbEntityEntry entry)
         {
             var objectStateEntry = ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager.GetObjectStateEntry(entry.Entity);
@@ -27,6 +30,7 @@ namespace ClipperPortal.Models
         {
             return obj == null ? "" : obj.ToString();
         }
+
 
         // https://www.exceptionnotfound.net/entity-change-tracking-using-dbcontext-in-entity-framework-6/
 
@@ -72,7 +76,8 @@ namespace ClipperPortal.Models
                             OldValue = originalValue,
                             NewValue = currentValue,
                             DateChanged = now,
-                            UserName = string.Empty
+                            UserName = this.UserName,
+                            Operator = this.Operator
                         };
 
                         AuditRecords.Add(auditRecord);
@@ -96,7 +101,8 @@ namespace ClipperPortal.Models
                     PrimaryKeyValue = primaryKey.ToString(),
                     Action = "Deleted",
                     DateChanged = now,
-                    UserName = string.Empty
+                    UserName = this.UserName,
+                    Operator = this.Operator
                 };
 
                 AuditRecords.Add(auditRecord);
