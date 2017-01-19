@@ -13,6 +13,7 @@ footer {
     left: 0;
     bottom: 0;
     background-color: #ddd;
+    border-top: 1px solid #ccc;
     width: 100%;
 }
 footer p {
@@ -179,6 +180,9 @@ fieldset legend {
 }
 .modal-dialog {
     margin: 200px auto !important;
+}
+.table.grid-table .grid-header > .grid-header-title {
+    margin-right: 2px;
 }
 @media print {
   a[href]:after {

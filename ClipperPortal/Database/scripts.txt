@@ -169,12 +169,12 @@ DROP PROCEDURE IF EXISTS `getdevicesurveylist`
 ;;
 CREATE PROCEDURE `getdevicesurveylist`()
 BEGIN
-	SELECT ID, Operator, ReportingPeriod, RecordStatus,
+	SELECT ID, Operator, ReportingPeriod, RecordStatus, LastUpdated,
 	SUM(GilligReplacementVehicles + NewFlyerReplacementVehicles + ElDoradoReplacementVehicles + OtherReplacementVehicles) AS 'ReplacementVehicles',
 	SUM(GilligExpansionVehicles + NewFlyerExpansionVehicles + ElDoradoExpansionVehicles + OtherExpansionVehicles) AS 'ExpansionVehicles'
 	FROM DeviceSurvey
-	GROUP BY ID, ReportingPeriod, Operator, RecordStatus
-	ORDER BY ID, ReportingPeriod, Operator, RecordStatus;
+	GROUP BY Operator, ReportingPeriod, RecordStatus
+	ORDER BY Operator, ReportingPeriod, RecordStatus;
 END
 ;;
 
